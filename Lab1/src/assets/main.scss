@@ -1,0 +1,40 @@
+$background: #f2f2f2;
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  line-height: 1.4;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: $background;
+  color: #000;
+}
+
+article {
+  display: grid;
+  grid-template-columns: 1fr 1fr 10px 740px 10px 1fr 1fr;
+
+  & > * {
+    grid-column: 4;
+  }
+
+  & > figure {
+    grid-column: 1 / -1;
+    margin: 20px 0;
+  }
+
+  & > .aside {
+    grid-column: 5 / -1;
+  }
+
+  & > blockquote {
+    grid-column: 3 / span 2;
+    margin: 0;
+    color: #666;
+    border-left: 3px solid black;
+    padding-left: 10px;
+  }
+}
