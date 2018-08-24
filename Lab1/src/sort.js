@@ -44,6 +44,7 @@ module.exports = class Sort {
 	static async insertionSort(array) {
 		let changes = 0;
 
+		const time = process.hrtime();
 		for (let j = 1; j < array.length; j++) {
 			let key = array[j];
 			let i = j - 1;
@@ -55,11 +56,12 @@ module.exports = class Sort {
 			array[i + 1] = key;
 		}
 
+		const diff = process.hrtime(time);
 		if (!this.muted) console.log("Array ordenado? " + await this.isArraySorted(array));
 
 		return {
 			"changes": changes,
-			"array": array,
+			"time": diff[0] + diff[1] / 1000000000 + " s",
 			"ordered": await this.isArraySorted(array)
 		};
 	}
@@ -75,6 +77,7 @@ module.exports = class Sort {
 
 	static async binaryInsertionSort(array) {
 		let changes = 0;
+		const time = process.hrtime();
 		for (let j = 1; j < array.length; j++) {
 			let key = array[j];
 			let i = j - 1;
@@ -88,11 +91,12 @@ module.exports = class Sort {
 		}
 
 
+		const diff = process.hrtime(time);
 		if (!this.muted) console.log("Array ordenado? " + await this.isArraySorted(array));
 
 		return {
 			"changes": changes,
-			"array": array,
+			"time": diff[0] + diff[1] / 1000000000 + " s",
 			"ordered": await this.isArraySorted(array)
 		};
 	}
@@ -141,25 +145,27 @@ module.exports = class Sort {
 		let numElems = 1;
 		switch (type) {
 			case 0:
+			case '0':
 				// (Shell,1959) - sequencia 1, 2, 4, 8, 16, 32, ...
-				while (e < maxElems) {
+				while (e < maxElem) {
 					e *= 2;
 					numElems++;
 				}
-				numElemes--;
+				numElems--;
 				e = 1;
-				for (let i = 0; i < numElemes; i++) {
+				for (let i = 0; i < numElems; i++) {
 					seq[i] = e;
 					e *= 2;
 				}
 				break;
 			case 1:
+			case '1':
 				// (Knuth,1971) - sequencia 1, 4, 13, 40, 121, 364, ...
 				while (e < maxElem) {
 					e = e * 3 + 1;
 					numElems++;
 				}
-				numElemes--;
+				numElems--;
 				e = 1;
 				for (let i = 0; i < numElems; i++) {
 					seq[i] = e;
@@ -167,6 +173,7 @@ module.exports = class Sort {
 				}
 				break;
 			case 2:
+			case '2':
 				// (Tokuda,1992) - sequencia 1, 4, 9, 20, 46, 103, ...
 				numElems = 0;
 				while (e < maxElem) {

@@ -18,7 +18,10 @@
   },
   "dependencies": {
     "body-parser": "^1.18.3",
+    "chalk": "^2.4.1",
     "express": "^4.16.3",
-    "hirestime": "^3.2.1"
+    "express-namespace-routes": "0.0.3",
+    "hirestime": "^3.2.1",
+    "morgan": "^1.9.0"
   }
 }
