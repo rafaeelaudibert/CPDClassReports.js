@@ -53,7 +53,7 @@ int main()
         printf("Tamanho Metodo\n");
 
     int s;
-    for(s=10000000;s<=80000000;s=s*2, changes=0){
+    for(s=100000;s<=100000;s=s*2, changes=0){
 
         /* Aloca array de tamanho s */
         startTimer(&t);
@@ -135,7 +135,7 @@ long long int insertionSort(int* C, int n)
     long long int changes = 0;
     int i, j, key;
 
-    for(int j=1; j<n; j++){
+    for(j=1; j<n; j++){
         key = C[j];
         i = j-1;
         while(i>=0 && C[i] > key){
@@ -353,4 +353,3 @@ void printArray(int* C, int size)
         printf("]\n");
     }
 }
-

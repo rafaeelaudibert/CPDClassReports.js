@@ -2,7 +2,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const Todo = require('./todo');
+const Sort = require('./sort');
+
 
 const app = express();
 app.use(bodyParser.json());
@@ -12,11 +13,17 @@ app.use((req, res, next) => {
 	res.setHeader('pragma', 'no-cache');
 	next();
 });
-app.get('/todos', (_, res) => {
-	Todo.findAll()
-		.then((todos) => {
-			res.send(todos);
-		});
+app.get('/bubble/:size', (req, res) => {
+	Sort.createRandomArray(req.params.size)
+		.then(array => Sort.bubbleSort(array))
+		.then(data => res.send(data))
+		.catch(err => console.error("Shit", err));
+});
+app.get('/shell/:size', (req, res) => {
+	Sort.createRandomArray(req.params.size)
+		.then(array => Sort.shellSort(array, 2))
+		.then(data => res.send(data))
+		.catch(err => console.error("Shit", err));
 });
 app.post('/todos', (req, res) => {
 	Todo.create({
