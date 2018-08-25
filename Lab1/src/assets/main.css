@@ -1,19 +1,20 @@
 body,
 html {
-	margin: 0;
+	margin: 1rem 0 0;
 	padding: 0;
 	line-height: 1.4;
 }
 
 body {
 	font-family: 'Montserrat', sans-serif;
-	background-color: #f2f2f2;
+	background-color: #f4f4f4;
 	color: #000;
 }
 
 article {
 	display: grid;
-	grid-template-columns: 1fr 1fr 10px 740px 10px 1fr 1fr;
+	grid-template-columns: 1fr 1fr 10px 60% 10px 1fr 1fr;
+	text-align: justify;
 }
 
 article > * {
@@ -35,4 +36,37 @@ article > blockquote {
 	color: #666;
 	border-left: 3px solid black;
 	padding-left: 10px;
+}
+
+.title {
+	margin-bottom: 1.5rem;
+}
+
+.title h1 {
+	height: 4rem;
+	text-align: justify;
+	margin-bottom: 0;
+}
+
+.title h1:after {
+	content: "";
+	display: inline-block;
+	width: 100%;
+}
+
+.title .info {
+	display: flex;
+	justify-content: space-between;
+}
+
+.title .info h3 {
+	min-width: 20%;
+}
+
+.title .info h3:nth-child(even) {
+	text-align: right;
+}
+
+.formula {
+	color: #FB3EFF;
 }

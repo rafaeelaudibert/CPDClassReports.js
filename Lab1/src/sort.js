@@ -144,9 +144,8 @@ module.exports = class Sort {
 		let e = 1;
 		let numElems = 1;
 		switch (type) {
-			case 0:
+			case 0: // (Shell,1959) - sequencia 1, 2, 4, 8, 16, 32, ...
 			case '0':
-				// (Shell,1959) - sequencia 1, 2, 4, 8, 16, 32, ...
 				while (e < maxElem) {
 					e *= 2;
 					numElems++;
@@ -158,9 +157,8 @@ module.exports = class Sort {
 					e *= 2;
 				}
 				break;
-			case 1:
+			case 1: // (Knuth,1971) - sequencia 1, 4, 13, 40, 121, 364, ...
 			case '1':
-				// (Knuth,1971) - sequencia 1, 4, 13, 40, 121, 364, ...
 				while (e < maxElem) {
 					e = e * 3 + 1;
 					numElems++;
@@ -172,9 +170,8 @@ module.exports = class Sort {
 					e = e * 3 + 1;
 				}
 				break;
-			case 2:
+			case 2: // (Tokuda,1992) - sequencia 1, 4, 9, 20, 46, 103, ...
 			case '2':
-				// (Tokuda,1992) - sequencia 1, 4, 9, 20, 46, 103, ...
 				numElems = 0;
 				while (e < maxElem) {
 					e = (Math.ceil((9.0 * Math.pow(9.0, numElems) / Math.pow(4.0, numElems) - 4.0) / 5.0));
