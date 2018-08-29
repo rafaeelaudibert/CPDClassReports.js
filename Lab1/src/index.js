@@ -96,7 +96,9 @@ routes.prefix('/random', random => {
 });
 
 app.use(routes);
-app.use(express.static('src/assets'))
+app.use(express.static('src/assets'));
+app.use(express.static('node_modules/chartjs-plugin-zoom'));
+app.use(express.static('notebookCcsv'));
 
 app.use(bodyParser.json());
 app.use((req, res, next) => {

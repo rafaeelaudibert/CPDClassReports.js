@@ -2,6 +2,6 @@
 a) 50n -> O(n) -- Pode ser mostrado com o código em Python com 51n e 49n, que são da ordem de n
 b) n² + 2n + 10 -> O(n) -- Pode ser mostrado com 2n² e n²
 c) n + lgn -> O(n) -- Pode ser mostrado com 2n e n
-d) n³ - n100n² -> O(n³) - Pode ser mostrado com n³ e n³/2
+d) n³ - 100n² -> O(n³) - Pode ser mostrado com n³ e n³/2
 e) 2n²/(3n²-1) -> O(1) - Pode ser mostrado com 1 e 1/3
 f) 10n * lg(2n) -> O(nlogn) - Pode ser mostrado com nlogn e 11nlog2n

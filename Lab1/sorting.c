@@ -6,7 +6,20 @@
 #include <time.h>       /* time */
 #include <sys/time.h>   /* struct timeval, gettimeofday */
 
-#define MAXNUMBER 26
+enum methods {
+  SHELL0,
+  SHELL1,
+  SHELL2,
+  BUBBLE,
+  INSERTION,
+  BINARYINSERTION
+};
+
+enum arraySort {
+  SORTED,
+  REVERSED,
+  RANDOM
+};
 
 /***********/
 /* HEADERS */
@@ -35,7 +48,8 @@ void createRandomArray(int* C, int size);
 int isArraySorted(int* C, int size);
 void printArray(int* C, int size);
 int* generateGapSequence(int maxElem, int type, int* seqSize);
-void create_csv(char *filename, double a[MAXNUMBER][3]);
+void create_csv(char *filename, double a[][3], int qtdData);
+void testSort(char *filename, int metodoSorting, int tipoDeArray, int maxSize);
 
 int verbose = 0;
 
@@ -45,58 +59,134 @@ int verbose = 0;
 
 int main()
 {
-    srand(time(NULL));
+    char filename[40];
 
-    Timer t;
-    float time;
-    double changes = 0;
+    //testSort(filename, metodoSorting, tipoDeArray, maxSize);
+    // strcpy(filename, "bubbleSorted.csv"); testSort(filename, BUBBLE, SORTED, 18);
+    // strcpy(filename, "insertionSorted.csv"); testSort(filename, INSERTION, SORTED, 18);
+    // strcpy(filename, "binaryInsertionSorted.csv"); testSort(filename, BINARYINSERTION, SORTED, 18);
+    // strcpy(filename, "shell0Sorted.csv"); testSort(filename, SHELL0, SORTED, 28);
+    // strcpy(filename, "shell1Sorted.csv"); testSort(filename, SHELL1, SORTED, 28);
+    // strcpy(filename, "shell2Sorted.csv"); testSort(filename, SHELL2, SORTED, 28);
+    // strcpy(filename, "bubbleReversed.csv"); testSort(filename, BUBBLE, REVERSED, 18);
+    // strcpy(filename, "insertionReversed.csv"); testSort(filename, INSERTION, REVERSED, 18);
+    // strcpy(filename, "binaryInsertionReversed.csv"); testSort(filename, BINARYINSERTION, REVERSED, 18);
+    // strcpy(filename, "shell0Reversed.csv"); testSort(filename, SHELL0, REVERSED, 28);
+    // strcpy(filename, "shell1Reversed.csv"); testSort(filename, SHELL1, REVERSED, 28);
+    // strcpy(filename, "shell2Reversed.csv"); testSort(filename, SHELL2, REVERSED, 28);
+    strcpy(filename, "bubbleRandom.csv"); testSort(filename, BUBBLE, RANDOM, 18);
+    strcpy(filename, "insertionRandom.csv"); testSort(filename, INSERTION, RANDOM, 18);
+    strcpy(filename, "binaryInsertionRandom.csv"); testSort(filename, BINARYINSERTION, RANDOM, 18);
+    strcpy(filename, "shell0Random.csv"); testSort(filename, SHELL0, RANDOM, 28);
+    strcpy(filename, "shell1Random.csv"); testSort(filename, SHELL1, RANDOM, 28);
+    strcpy(filename, "shell2Random.csv"); testSort(filename, SHELL2, RANDOM, 28);
 
-    int* array;
-    double vals[MAXNUMBER][3];
-    char filename[] = "randomShell1EvenBigger.csv";
-
-    if(verbose)
-        printf("Tamanho Metodo\n");
-
-    int tamanho, i;
-    for(tamanho=2, i=0; tamanho<=pow(2, MAXNUMBER); tamanho*=2, changes=0, i++)
-    {
-
-        /* Aloca array de tamanho s */
-        array = (int*) malloc(tamanho*sizeof(int));
-
-        /* Gera configuracao do array */
-        // createSortedArray(array,tamanho);
-        // createReversedArray(array,tamanho);
-        createRandomArray(array,tamanho);
-
-        /* Executa metodo */
-        startTimer(&t);
-        // changes = bubbleSort(array,tamanho);
-        // changes = insertionSort(array,tamanho);
-        // changes = binaryInsertionSort(array,tamanho);
-        // changes = shellSort(array,tamanho,0); // usando sequencia de Shell,1959
-        changes = shellSort(array,tamanho,1); // usando sequencia de Knuth,1971
-        // changes = shellSort(array,tamanho,2); // usando sequencia de Tokuda,1992
-        time = stopTimer(&t);
-
-
-        printf("Size: %7d\tChanges: %12.0lf\tTime: %4.10f\n", tamanho, changes, time);
-        vals[i][0] = (double)tamanho;
-        vals[i][1] = (double)changes;
-        vals[i][2] = (double)time;
-
-        free(array);
-    }
-    create_csv(filename, vals);
 
     return 0;
 }
 
 /*******************/
+/* TESTING METHOD */
+/*******************/
+void testSort(char *filename, int metodoSorting, int tipoDeArray, int maxSize){
+
+  srand(time(NULL));
+
+  Timer t;
+  float time;
+  double changes;
+  int tamanho, i;
+  float repeticoes;
+  int* array;
+  double vals[maxSize][3];
+
+  printf("Starting %s with size %d", filename, maxSize);
+  for(tamanho=2, i=0, repeticoes=0, changes=0; tamanho<=pow(2, maxSize); tamanho*=2, changes=0, i++, repeticoes=0)
+  {
+
+      /* Aloca array de tamanho s */
+      array = (int*) malloc(tamanho*sizeof(int));
+      switch (tipoDeArray) {
+        case SORTED:
+          createSortedArray(array, tamanho);
+          break;
+        case REVERSED:
+          createReversedArray(array, tamanho);
+          break;
+        case RANDOM:
+          createRandomArray(array, tamanho);
+          break;
+        default:
+          printf("Tipo de array invalido\n");
+          break;
+      }
+
+      /* Executa metodo */
+      startTimer(&t);
+      switch (metodoSorting) {
+        case BUBBLE:
+          do {
+            createRandomArray(array, tamanho);
+            changes += bubbleSort(array, tamanho);
+            time = stopTimer(&t);
+            repeticoes++;
+          }while(time < 120 && tipoDeArray == RANDOM && repeticoes < 12); //Se eu tiver uma array aleatoria, vou tentar fazer uma média dos valores de changes e time com no maximo 10 amostras
+          changes = changes / (float)repeticoes;
+          time /= repeticoes;
+          break;
+        case INSERTION:
+          do {
+            createRandomArray(array, tamanho);
+            changes += insertionSort(array, tamanho);
+            time = stopTimer(&t);
+            repeticoes++;
+          }while(time < 120 && tipoDeArray == RANDOM && repeticoes < 12); //Se eu tiver uma array aleatoria, vou tentar fazer uma média dos valores de changes e time com no maximo 10 amostras
+          changes = changes / (float)repeticoes;
+          time /= repeticoes;
+          break;
+        case BINARYINSERTION:
+          do {
+            createRandomArray(array, tamanho);
+            changes += binaryInsertionSort(array, tamanho);
+            time = stopTimer(&t);
+            repeticoes++;
+          }while(time < 120 && tipoDeArray == RANDOM && repeticoes < 12); //Se eu tiver uma array aleatoria, vou tentar fazer uma média dos valores de changes e time com no maximo 10 amostras
+          changes = changes / (float)repeticoes;
+          time /= repeticoes;
+          break;
+        case SHELL0:
+        case SHELL1:
+        case SHELL2:
+          do {
+            createRandomArray(array, tamanho);
+            changes += shellSort(array, tamanho, metodoSorting);
+            time = stopTimer(&t);
+            repeticoes++;
+          }while(time < 120 && tipoDeArray == RANDOM && repeticoes < 12); //Se eu tiver uma array aleatoria, vou tentar fazer uma média dos valores de changes e time com no maximo 10 amostras
+          changes = changes / (float)repeticoes;
+          time /= repeticoes;
+          break;
+        default:
+          printf("Metodo de sorting invalido\n");
+          break;
+      }
+
+      printf("\nSize: %7d\tChanges: %12.0lf\tTime: %4.10f\tRepeticoes: %2.0f", tamanho, changes, time, repeticoes);
+      vals[i][0] = (double)tamanho;
+      vals[i][1] = (double)changes;
+      vals[i][2] = (double)time;
+
+      free(array);
+  }
+  create_csv(filename, vals, maxSize);
+
+  return;
+}
+
+/*******************/
 /* SAVE IN CSV METHOD */
 /*******************/
-void create_csv(char *filename, double a[MAXNUMBER][3])
+void create_csv(char *filename, double a[][3], int qtdData)
 {
 
     FILE *fp;
@@ -107,7 +197,7 @@ void create_csv(char *filename, double a[MAXNUMBER][3])
     fp=fopen(filename,"w+");
     fprintf(fp,"Iteration, Array Size, Swaps, Time");
 
-    for(i=0; i<MAXNUMBER; i++)
+    for(i=0; i<qtdData; i++)
     {
         fprintf(fp,"\n%d, %.0lf, %.0lf, %lf",i+1, a[i][0], a[i][1], a[i][2]);
     }

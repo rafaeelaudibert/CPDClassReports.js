@@ -70,3 +70,11 @@ article > blockquote {
 .formula {
 	color: #FB3EFF;
 }
+
+h2 {
+	margin-top: 1.5rem !important;
+}
+
+.canvas-inside {
+	width: 100%;
+}
