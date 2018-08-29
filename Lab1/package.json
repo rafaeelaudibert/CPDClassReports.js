@@ -9,6 +9,10 @@
   "keywords": [
     "sort"
   ],
+  "repository": {
+	  "type": "git",
+	  "url": "https://github.com/rafaeelaudibert/CPD.git"
+  },
   "author": "RafaAudibert",
   "license": "ISC",
   "devDependencies": {
