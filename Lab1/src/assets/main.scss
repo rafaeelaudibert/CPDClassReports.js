@@ -13,6 +13,41 @@ body {
   color: #000;
 }
 
+img {
+  width: 100%;
+}
+
+.line-numbers a {
+  text-decoration: none;
+  color: #000;
+  padding-right: 1em;
+}
+
+code {
+  background: #eee;
+  padding: 2px 5px;
+}
+
+pre {
+  background: #eee;
+  padding: 10px 15px;
+  overflow: auto;
+
+  & > code {
+    padding: 0;
+  }
+}
+
+figure {
+  margin: 0;
+
+  figcaption {
+    color: #666;
+    font-style: italic;
+    font-size: 0.8em;
+  }
+}
+
 article {
   display: grid;
   grid-template-columns: 1fr 1fr 10px 60% 10px 1fr 1fr;
@@ -20,6 +55,21 @@ article {
 
   & > * {
     grid-column: 4;
+    min-width: 0;
+  }
+
+  & > p {
+    --x-height-multiplier: 0.375;
+    --baseline-multiplier: 0.17;
+    letter-spacing: 0.01rem;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 21px;
+    line-height: 1.58;
+    letter-spacing: -.003em;
+    color: rgba(0,0,0,.84);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
   }
 
   & > figure {
@@ -29,6 +79,9 @@ article {
 
   & > .aside {
     grid-column: 5 / -1;
+    margin: 30px 20px;
+    color: #666;
+    font-size: 0.8em;
   }
 
   & > blockquote {
@@ -79,4 +132,15 @@ h2 {
 
 .canvas-inside {
   width: 100%;
+}
+
+footer {
+  color: #2525ee;
+  float: right;
+  margin: 1.5rem 1rem 0.5rem 0;
+
+  a:hover {
+    color: #1515ff;
+    text-decoration: none;
+  }
 }

@@ -10,8 +10,8 @@
     "sort"
   ],
   "repository": {
-	  "type": "git",
-	  "url": "https://github.com/rafaeelaudibert/CPD.git"
+    "type": "git",
+    "url": "https://github.com/rafaeelaudibert/CPD.git"
   },
   "author": "RafaAudibert",
   "license": "ISC",
@@ -23,6 +23,7 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "chalk": "^2.4.1",
+    "chartist-plugin-tooltips": "0.0.17",
     "chartjs-plugin-zoom": "^0.6.4",
     "express": "^4.16.3",
     "express-namespace-routes": "0.0.3",
