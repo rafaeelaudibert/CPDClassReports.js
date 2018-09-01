@@ -13,56 +13,80 @@ const app = express();
 /* SORTED ARRAYS */
 routes.prefix('/sorted', async sorted => {
 	sorted.get('/bubble/:size', async (req, res) => {
-		Sort.createSortedArray(req.params.size)
-			.then(array => Sort.bubbleSort(array))
-			.then(data => res.json(data))
-			.catch(console.error);
+		try {
+			arr = await Sort.createSortedArray(req.params.size);
+			data = await Sort.bubbleSort(arr)
+			res.json(data)
+		} catch (e) {
+			console.log(e);
+		}
 	});
 	sorted.get('/insertion/:size', async (req, res) => {
-		Sort.createSortedArray(req.params.size)
-			.then(array => Sort.insertionSort(array))
-			.then(data => res.json(data))
-			.catch(console.error);
+		try {
+			arr = await Sort.createSortedArray(req.params.size);
+			data = await Sort.insertionSort(arr)
+			res.json(data)
+		} catch (e) {
+			console.log(e);
+		}
 	});
 	sorted.get('/binaryInsertion/:size', async (req, res) => {
-		Sort.createSortedArray(req.params.size)
-			.then(array => Sort.binaryInsertionSort(array))
-			.then(data => res.json(data))
-			.catch(console.error);
+		try {
+			arr = await Sort.createSortedArray(req.params.size);
+			data = await Sort.binaryInsertionSort(arr)
+			res.json(data)
+		} catch (e) {
+			console.log(e);
+		}
 	});
 	sorted.get('/shell/:id/:size', async (req, res) => {
-		Sort.createSortedArray(req.params.size)
-			.then(array => Sort.shellSort(array, req.params.id))
-			.then(data => res.json(data))
-			.catch(console.error);
+		try {
+			arr = await Sort.createSortedArray(req.params.size)
+			data = await Sort.shellSort(arr, req.params.id)
+			res.json(data);
+		} catch (e) {
+			console.log(e);
+		}
 	});
 });
 
 /* REVERSED ARRAYS */
 routes.prefix('/reversed', async reversed => {
 	reversed.get('/bubble/:size', async (req, res) => {
-		Sort.createReversedArray(req.params.size)
-			.then(array => Sort.bubbleSort(array))
-			.then(data => res.json(data))
-			.catch(console.error);
+		try {
+			arr = await Sort.createReversedArray(req.params.size);
+			data = await Sort.bubbleSort(arr)
+			res.json(data)
+		} catch (e) {
+			console.log(e);
+		}
 	});
 	reversed.get('/insertion/:size', async (req, res) => {
-		Sort.createReversedArray(req.params.size)
-			.then(array => Sort.insertionSort(array))
-			.then(data => res.json(data))
-			.catch(console.error);
+		try {
+			arr = await Sort.createReversedArray(req.params.size);
+			data = await Sort.insertionSort(arr)
+			res.json(data)
+		} catch (e) {
+			console.log(e);
+		}
 	});
 	reversed.get('/binaryInsertion/:size', async (req, res) => {
-		Sort.createReversedArray(req.params.size)
-			.then(array => Sort.binaryInsertionSort(array))
-			.then(data => res.json(data))
-			.catch(console.error);
+		try {
+			arr = await Sort.createReversedArray(req.params.size);
+			data = await Sort.binaryInsertionSort(arr)
+			res.json(data)
+		} catch (e) {
+			console.log(e);
+		}
 	});
 	reversed.get('/shell/:id/:size', async (req, res) => {
-		Sort.createReversedArray(req.params.size)
-			.then(array => Sort.shellSort(array, req.params.id))
-			.then(data => res.json(data))
-			.catch(console.error);
+		try {
+			arr = await Sort.createReversedArray(req.params.size)
+			data = await Sort.shellSort(arr, req.params.id)
+			res.json(data);
+		} catch (e) {
+			console.log(e);
+		}
 	});
 });
 
@@ -110,39 +134,44 @@ routes.prefix('/random', async random => {
 /* CUSTOM ARRAYS */
 routes.prefix('/custom', async custom => {
 	custom.get('/bubble/:array', async (req, res) => {
-		Sort.bubbleSort(req.params.array.split(','))
-			.then(data => res.json(data))
-			.catch(console.error);
+		try {
+			const data = await Sort.bubbleSort(req.params.array.split(','))
+			res.json(data)
+		} catch (e) {
+			console.log(e);
+		}
 	});
 	custom.get('/insertion/:array', async (req, res) => {
-		Sort.insertionSort(req.params.array.split(','))
-			.then(data => res.json(data))
-			.catch(console.error);
+		try {
+			const data = await Sort.insertionSort(req.params.array.split(','))
+			res.json(data)
+		} catch (e) {
+			console.log(e);
+		}
 	});
 	custom.get('/binaryInsertion/:array', async (req, res) => {
-		Sort.binaryInsertionSort(req.params.array.split(','))
-			.then(data => res.json(data))
-			.catch(console.error);
+		try {
+			const data = await Sort.binaryInsertionSort(req.params.array.split(','))
+			res.json(data)
+		} catch (e) {
+			console.log(e);
+		}
 	});
 	custom.get('/shell/:id/:array', async (req, res) => {
-		Sort.bubbleSort(req.params.array.split(','), req.params.id)
-			.then(data => res.json(data))
-			.catch(console.error);
+		try {
+			const data = await Sort.shellSort(req.params.array.split(','), req.params.id);
+			res.json(data);
+		} catch (e) {
+			console.log(e);
+		}
 	});
 });
 
-let startTime;
-setInterval(function() {
-	if (!startTime) {
-		startTime = Date.now();
-	}
-	console.log((Date.now() - startTime) / 1000);
-}, 100)
-
 app.use(routes);
+app.use(express.static('src'));
 app.use(express.static('src/assets'));
 app.use(express.static('node_modules/chartjs-plugin-zoom'));
-app.use(express.static('notebookCcsv'));
+app.use(express.static('csv'));
 
 app.use(bodyParser.json());
 app.use(async (req, res, next) => {

@@ -76,14 +76,14 @@ module.exports = class Sort {
 	}
 
 	static async binarySearch(array, inf, sup, key) {
-		return new Promise((resolve, reject) => {
+		return new Promise(async (resolve, reject) => {
 			try {
 				let half = inf + Math.floor((sup - inf) / 2);
 				let ans;
 
 				if (inf == sup) ans = inf;
-				else if (key > array[half]) ans = this.binarySearch(array, half + 1, sup, key);
-				else if (key < array[half]) ans = this.binarySearch(array, inf, half, key);
+				else if (key > array[half]) ans = await this.binarySearch(array, half + 1, sup, key);
+				else if (key < array[half]) ans = await this.binarySearch(array, inf, half, key);
 				else ans = half;
 
 				resolve(ans);
@@ -95,14 +95,14 @@ module.exports = class Sort {
 	}
 
 	static async binaryInsertionSort(array) {
-		return new Promise((resolve, reject) => {
+		return new Promise(async (resolve, reject) => {
 			try {
 				let changes = 0;
 				const time = process.hrtime();
 				for (let j = 1; j < array.length; j++) {
 					let key = array[j];
 					let i = j - 1;
-					let posicao = this.binarySearch(array, 0, j, key);
+					let posicao = await this.binarySearch(array, 0, j, key);
 					while (i >= posicao) {
 						array[i + 1] = array[i];
 						i--;
@@ -113,6 +113,7 @@ module.exports = class Sort {
 
 
 				const diff = process.hrtime(time);
+				// console.log(await this.isArraySorted(array))
 
 				resolve({
 					changes: changes,
