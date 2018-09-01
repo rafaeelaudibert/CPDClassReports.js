@@ -188,218 +188,12 @@
       }</code></pre>
       <div class='canvas-inside'>
         <canvas id="bubble-1" class="chartjs" width="640" height="400"></canvas>
-        <script>
-          $(document).ready(function() {
-            $.ajax({
-              type: "GET",
-              url: "bubbleSorted.csv",
-              dataType: "text",
-              success: data => {
-                const {
-                  headers,
-                  lines
-                } = processData(data);
-                const info = transpose(lines);
-                console.log(info);
-                const bubbleSortedChart = new Chart(document.getElementById("bubble-1"), {
-                  "type": "bar",
-                  "data": {
-                    "labels": info[1],
-                    "datasets": [{
-                        "label": "Changes",
-                        "data": info[2],
-                        "fill": false,
-                        backgroundColor: 'rgb(160, 200, 24)',
-                        "lineTension": 0.5
-                      },
-                      {
-                        "label": "Time",
-                        "data": info[3],
-                        'type': 'line',
-                        "borderColor": "rgb(192, 75, 192)",
-                        "lineTension": 0.5,
-                        yAxesId: 'right'
-                      }
-                    ]
-                  },
-                  options: {
-                    title: {
-                      display: true,
-                      text: 'Bubble Sort - SORTED'
-                    },
-                    tooltips: {
-                      callbacks: {
-                        title: (item, data) => `Size: ${item[0].xLabel}`
-                      }
-                    },
-                    scales: {
-                      yAxes: [{
-                        id: 'left',
-                        type: 'linear',
-                        position: 'left',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }, {
-                        id: 'right',
-                        type: 'linear',
-                        position: 'right',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }]
-                    }
-                  }
-                });
-              }
-            });
-          });
-
-        </script>
       </div>
       <div class='canvas-inside'>
         <canvas id="bubble-2" class="chartjs" width="640" height="400"></canvas>
-        <script>
-          $(document).ready(function() {
-            $.ajax({
-              type: "GET",
-              url: "bubbleReversed.csv",
-              dataType: "text",
-              success: data => {
-                const {
-                  headers,
-                  lines
-                } = processData(data);
-                const info = transpose(lines);
-                console.log(info);
-                const bubbleSortedChart = new Chart(document.getElementById("bubble-2"), {
-                  "type": "bar",
-                  "data": {
-                    "labels": info[1],
-                    "datasets": [{
-                        "label": "Time",
-                        "data": info[3],
-                        'type': 'line',
-                        fill: true,
-                        "borderColor": "rgb(192, 75, 192)",
-                        "lineTension": 0.5,
-                        yAxisID: 'right'
-                      },
-                      {
-                        "label": "Changes",
-                        "data": info[2],
-                        backgroundColor: 'rgb(160, 200, 24)',
-                        "lineTension": 0.5,
-                        yAxesIdsID: 'left'
-                      }
-                    ]
-                  },
-                  options: {
-                    title: {
-                      display: true,
-                      text: 'Bubble Sort - REVERSED'
-                    },
-                    tooltips: {
-                      callbacks: {
-                        title: (item, data) => `Size: ${item[0].xLabel}`
-                      }
-                    },
-                    scales: {
-                      yAxes: [{
-                        id: 'left',
-                        type: 'linear',
-                        position: 'left',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }, {
-                        id: 'right',
-                        type: 'linear',
-                        position: 'right',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }]
-                    }
-                  }
-                });
-              }
-            });
-          });
-
-        </script>
       </div>
       <div class='canvas-inside'>
         <canvas id="bubble-3" class="chartjs" width="640" height="400"></canvas>
-        <script>
-          $(document).ready(function() {
-            $.ajax({
-              type: "GET",
-              url: "bubbleRandom.csv",
-              dataType: "text",
-              success: data => {
-                const {
-                  headers,
-                  lines
-                } = processData(data);
-                const info = transpose(lines);
-                console.log(info);
-                const bubbleSortedChart = new Chart(document.getElementById("bubble-3"), {
-                  "type": "bar",
-                  "data": {
-                    "labels": info[1],
-                    "datasets": [{
-                        "label": "Time",
-                        "data": info[3],
-                        'type': 'line',
-                        fill: true,
-                        "borderColor": "rgb(192, 75, 192)",
-                        "lineTension": 0.5,
-                        yAxisID: 'right'
-                      },
-                      {
-                        "label": "Changes",
-                        "data": info[2],
-                        backgroundColor: 'rgb(160, 200, 24)',
-                        "lineTension": 0.5,
-                        yAxesIdsID: 'left'
-                      }
-                    ]
-                  },
-                  options: {
-                    title: {
-                      display: true,
-                      text: 'Bubble Sort - RANDOM (Logarithmic scale)'
-                    },
-                    tooltips: {
-                      callbacks: {
-                        title: (item, data) => `Size: ${item[0].xLabel}`
-                      }
-                    },
-                    scales: {
-                      yAxes: [{
-                        id: 'left',
-                        type: 'logarithmic',
-                        position: 'left',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }, {
-                        id: 'right',
-                        type: 'logarithmic',
-                        position: 'right',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }]
-                    }
-                  }
-                });
-              }
-            });
-          });
-
-        </script>
       </div>
       <p>Some information we can retrieve from this charts are that BubbleSort has best case complexity of \(\Theta(n)\) as it will only run through the array once, and stop, this is why it only makes 0 changes, and has such a small running time (0?). Reversed
         case really show us why he has such an assymptotic curve, going from 0.82s in the size 16384 to incredible 177s when in size 262144 (16x bigger size, 256x bigger time, as we would expect with a \(\Theta(n^2)\) complexity). To have some fun, we
@@ -434,226 +228,20 @@
       }</code></pre>
       <div class='canvas-inside'>
         <canvas id="insertion-1" class="chartjs" width="640" height="400"></canvas>
-        <script>
-          $(document).ready(function() {
-            $.ajax({
-              type: "GET",
-              url: "insertionSorted.csv",
-              dataType: "text",
-              success: data => {
-                const {
-                  headers,
-                  lines
-                } = processData(data);
-                const info = transpose(lines);
-                console.log(info);
-                const bubbleSortedChart = new Chart(document.getElementById("insertion-1"), {
-                  "type": "bar",
-                  "data": {
-                    "labels": info[1],
-                    "datasets": [{
-                        "label": "Changes",
-                        "data": info[2],
-                        "fill": false,
-                        backgroundColor: 'rgb(160, 200, 24)',
-                        "lineTension": 0.5
-                      },
-                      {
-                        "label": "Time",
-                        "data": info[3],
-                        'type': 'line',
-                        "borderColor": "rgb(192, 75, 192)",
-                        "lineTension": 0.5,
-                        yAxesId: 'right'
-                      }
-                    ]
-                  },
-                  options: {
-                    title: {
-                      display: true,
-                      text: 'Insertion Sort - SORTED'
-                    },
-                    tooltips: {
-                      callbacks: {
-                        title: (item, data) => `Size: ${item[0].xLabel}`
-                      }
-                    },
-                    scales: {
-                      yAxes: [{
-                        id: 'left',
-                        type: 'linear',
-                        position: 'left',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }, {
-                        id: 'right',
-                        type: 'linear',
-                        position: 'right',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }]
-                    }
-                  }
-                });
-              }
-            });
-          });
-
-        </script>
       </div>
       <div class='canvas-inside'>
         <canvas id="insertion-2" class="chartjs" width="640" height="400"></canvas>
-        <script>
-          $(document).ready(function() {
-            $.ajax({
-              type: "GET",
-              url: "insertionReversed.csv",
-              dataType: "text",
-              success: data => {
-                const {
-                  headers,
-                  lines
-                } = processData(data);
-                const info = transpose(lines);
-                console.log(info);
-                const bubbleSortedChart = new Chart(document.getElementById("insertion-2"), {
-                  "type": "bar",
-                  "data": {
-                    "labels": info[1],
-                    "datasets": [{
-                        "label": "Time",
-                        "data": info[3],
-                        'type': 'line',
-                        fill: true,
-                        "borderColor": "rgb(192, 75, 192)",
-                        "lineTension": 0.5,
-                        yAxisID: 'right'
-                      },
-                      {
-                        "label": "Changes",
-                        "data": info[2],
-                        backgroundColor: 'rgb(160, 200, 24)',
-                        "lineTension": 0.5,
-                        yAxesIdsID: 'left'
-                      }
-                    ]
-                  },
-                  options: {
-                    title: {
-                      display: true,
-                      text: 'Insertion Sort - REVERSED'
-                    },
-                    tooltips: {
-                      callbacks: {
-                        title: (item, data) => `Size: ${item[0].xLabel}`
-                      }
-                    },
-                    scales: {
-                      yAxes: [{
-                        id: 'left',
-                        type: 'linear',
-                        position: 'left',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }, {
-                        id: 'right',
-                        type: 'linear',
-                        position: 'right',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }]
-                    }
-                  }
-                });
-              }
-            });
-          });
-
-        </script>
       </div>
       <div class='canvas-inside'>
         <canvas id="insertion-3" class="chartjs" width="640" height="400"></canvas>
-        <script>
-          $(document).ready(function() {
-            $.ajax({
-              type: "GET",
-              url: "insertionRandom.csv",
-              dataType: "text",
-              success: data => {
-                const {
-                  headers,
-                  lines
-                } = processData(data);
-                const info = transpose(lines);
-                console.log(info);
-                const bubbleSortedChart = new Chart(document.getElementById("insertion-3"), {
-                  "type": "bar",
-                  "data": {
-                    "labels": info[1],
-                    "datasets": [{
-                        "label": "Time",
-                        "data": info[3],
-                        'type': 'line',
-                        fill: true,
-                        "borderColor": "rgb(192, 75, 192)",
-                        "lineTension": 0.5,
-                        yAxisID: 'right'
-                      },
-                      {
-                        "label": "Changes",
-                        "data": info[2],
-                        backgroundColor: 'rgb(160, 200, 24)',
-                        "lineTension": 0.5,
-                        yAxesIdsID: 'left'
-                      }
-                    ]
-                  },
-                  options: {
-                    title: {
-                      display: true,
-                      text: 'Insertion Sort - RANDOM (Logarithmic scale)'
-                    },
-                    tooltips: {
-                      callbacks: {
-                        title: (item, data) => `Size: ${item[0].xLabel}`
-                      }
-                    },
-                    scales: {
-                      yAxes: [{
-                        id: 'left',
-                        type: 'logarithmic',
-                        position: 'left',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }, {
-                        id: 'right',
-                        type: 'logarithmic',
-                        position: 'right',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }]
-                    }
-                  }
-                });
-              }
-            });
-          });
-
-        </script>
       </div>
-      <p>Hello again, bro! How've you been? I really like the Selection Sort idea, it's really a pity that it's a worst-case complexity of \(\Theta(n^2)\). 😞. Reversed chart shows us that it makes exactly the same changes as the BubbleSort in reverse order,
-        although it took less time, so point to Insertion ✨. In random data, it also runs A LOT faster than Bubble sort (in this sample casa, almost 3X faster). So, although both have an average-case time complexity of \(\Theta(n^2)\), it will only be
-        the same assymptotically, as in "small" samples Insertion can be really faster. </p>
+      <p>Hello again, bro! How've you been? Long time, no see. I really like the Selection Sort idea, it's really a pity that it's a worst-case complexity of \(\Theta(n^2)\). 😞. Reversed chart shows us that it makes exactly the same changes as the BubbleSort
+        in reverse order, although it took less time, so point to Insertion ✨. In random data, it also runs A LOT faster than Bubble sort (in this sample casa, almost 3X faster). So, although both have an average-case time complexity of \(\Theta(n^2)\),
+        it will only be the same assymptotically, as in "small" samples Insertion can be really faster. </p>
       <br/>
 
       <h3>Binary Insertion Sort ⤵️</h3>
-      <p>Now we will have an evolution of the normal Insertion Sort Algorithm. As we are searching the place to insert our new number, in an already ordered arrray, it is pretty easy to think about a bynary search to find the exact place. So, let's see how
+      <p>Now we will have a kind of evolution of the Insertion Sort Algorithm. As we are searching the place to insert our new number, in an already ordered arrray, it is pretty easy to think about a bynary search to find the exact place. So, let's see how
         the thing goes.</p>
       <p>Again, arrays size varying from \(2^1\) until \(2^{18}\) to generate the data below. Could have used a bigger data sample, because as you wil see, this is a bit faster than the last two, but to keep the comparison between them, we used the same
         data sample.
@@ -698,218 +286,12 @@
       }</code></pre>
       <div class='canvas-inside'>
         <canvas id="binary-1" class="chartjs" width="640" height="400"></canvas>
-        <script>
-          $(document).ready(function() {
-            $.ajax({
-              type: "GET",
-              url: "binaryInsertionSorted.csv",
-              dataType: "text",
-              success: data => {
-                const {
-                  headers,
-                  lines
-                } = processData(data);
-                const info = transpose(lines);
-                console.log(info);
-                const bubbleSortedChart = new Chart(document.getElementById("binary-1"), {
-                  "type": "bar",
-                  "data": {
-                    "labels": info[1],
-                    "datasets": [{
-                        "label": "Changes",
-                        "data": info[2],
-                        "fill": false,
-                        backgroundColor: 'rgb(160, 200, 24)',
-                        "lineTension": 0.5
-                      },
-                      {
-                        "label": "Time",
-                        "data": info[3],
-                        'type': 'line',
-                        "borderColor": "rgb(192, 75, 192)",
-                        "lineTension": 0.5,
-                        yAxesId: 'right'
-                      }
-                    ]
-                  },
-                  options: {
-                    title: {
-                      display: true,
-                      text: 'Binary Insertion Sort - SORTED'
-                    },
-                    tooltips: {
-                      callbacks: {
-                        title: (item, data) => `Size: ${item[0].xLabel}`
-                      }
-                    },
-                    scales: {
-                      yAxes: [{
-                        id: 'left',
-                        type: 'linear',
-                        position: 'left',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }, {
-                        id: 'right',
-                        type: 'linear',
-                        position: 'right',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }]
-                    }
-                  }
-                });
-              }
-            });
-          });
-
-        </script>
       </div>
       <div class='canvas-inside'>
         <canvas id="binary-2" class="chartjs" width="640" height="400"></canvas>
-        <script>
-          $(document).ready(function() {
-            $.ajax({
-              type: "GET",
-              url: "binaryInsertionReversed.csv",
-              dataType: "text",
-              success: data => {
-                const {
-                  headers,
-                  lines
-                } = processData(data);
-                const info = transpose(lines);
-                console.log(info);
-                const bubbleSortedChart = new Chart(document.getElementById("binary-2"), {
-                  "type": "bar",
-                  "data": {
-                    "labels": info[1],
-                    "datasets": [{
-                        "label": "Time",
-                        "data": info[3],
-                        'type': 'line',
-                        fill: true,
-                        "borderColor": "rgb(192, 75, 192)",
-                        "lineTension": 0.5,
-                        yAxisID: 'right'
-                      },
-                      {
-                        "label": "Changes",
-                        "data": info[2],
-                        backgroundColor: 'rgb(160, 200, 24)',
-                        "lineTension": 0.5,
-                        yAxesIdsID: 'left'
-                      }
-                    ]
-                  },
-                  options: {
-                    title: {
-                      display: true,
-                      text: 'Binary Insertion Sort - REVERSED'
-                    },
-                    tooltips: {
-                      callbacks: {
-                        title: (item, data) => `Size: ${item[0].xLabel}`
-                      }
-                    },
-                    scales: {
-                      yAxes: [{
-                        id: 'left',
-                        type: 'linear',
-                        position: 'left',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }, {
-                        id: 'right',
-                        type: 'linear',
-                        position: 'right',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }]
-                    }
-                  }
-                });
-              }
-            });
-          });
-
-        </script>
       </div>
       <div class='canvas-inside'>
         <canvas id="binary-3" class="chartjs" width="640" height="400"></canvas>
-        <script>
-          $(document).ready(function() {
-            $.ajax({
-              type: "GET",
-              url: "binaryInsertionRandom.csv",
-              dataType: "text",
-              success: data => {
-                const {
-                  headers,
-                  lines
-                } = processData(data);
-                const info = transpose(lines);
-                console.log(info);
-                const bubbleSortedChart = new Chart(document.getElementById("binary-3"), {
-                  "type": "bar",
-                  "data": {
-                    "labels": info[1],
-                    "datasets": [{
-                        "label": "Time",
-                        "data": info[3],
-                        'type': 'line',
-                        fill: true,
-                        "borderColor": "rgb(192, 75, 192)",
-                        "lineTension": 0.5,
-                        yAxisID: 'right'
-                      },
-                      {
-                        "label": "Changes",
-                        "data": info[2],
-                        backgroundColor: 'rgb(160, 200, 24)',
-                        "lineTension": 0.5,
-                        yAxesIdsID: 'left'
-                      }
-                    ]
-                  },
-                  options: {
-                    title: {
-                      display: true,
-                      text: 'Binary Insertion Sort - RANDOM (Logarithmic scale)'
-                    },
-                    tooltips: {
-                      callbacks: {
-                        title: (item, data) => `Size: ${item[0].xLabel}`
-                      }
-                    },
-                    scales: {
-                      yAxes: [{
-                        id: 'left',
-                        type: 'logarithmic',
-                        position: 'left',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }, {
-                        id: 'right',
-                        type: 'logarithmic',
-                        position: 'right',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }]
-                    }
-                  }
-                });
-              }
-            });
-          });
-
-        </script>
       </div>
       <p>As you can see, the changes occur the exactly same times both in Normal and Binary Insertion. The great advantage comes when we don't need to compare as many times as we would compare in a normal Insertion Sort, because we can find the place we
         must inert ourselves in \(\log n\) time, giving us something around 30% of time, although having an average-case time complexity of \(\Theta(n^2)\), exactly the same as Bubble and Insertion Sort.</p>
@@ -943,7 +325,7 @@
               h = sequence[i];
               for(f=0; f&lt;h; f++)
               {
-                  changes += insertionShellSort(C,n,h,f); //The same code from before
+                  changes += insertionShellSort(C,n,h,f); //The same code from before, with some '1' values changed for h or f, accordingly
               }
           }
 
@@ -953,661 +335,111 @@
       }</code></pre>
       <div class='canvas-inside'>
         <canvas id="shell0-1" class="chartjs" width="640" height="400"></canvas>
-        <script>
-          $(document).ready(function() {
-            $.ajax({
-              type: "GET",
-              url: "shell0Sorted.csv",
-              dataType: "text",
-              success: data => {
-                const {
-                  headers,
-                  lines
-                } = processData(data);
-                const info = transpose(lines);
-                console.log(info);
-                const bubbleSortedChart = new Chart(document.getElementById("shell0-1"), {
-                  "type": "bar",
-                  "data": {
-                    "labels": info[1],
-                    "datasets": [{
-                        "label": "Changes",
-                        "data": info[2],
-                        "fill": false,
-                        backgroundColor: 'rgb(160, 200, 24)',
-                        "lineTension": 0.5
-                      },
-                      {
-                        "label": "Time",
-                        "data": info[3],
-                        'type': 'line',
-                        "borderColor": "rgb(192, 75, 192)",
-                        "lineTension": 0.5,
-                        yAxesId: 'right'
-                      }
-                    ]
-                  },
-                  options: {
-                    title: {
-                      display: true,
-                      text: 'Shell Sort (Shell Sequence) - SORTED'
-                    },
-                    tooltips: {
-                      callbacks: {
-                        title: (item, data) => `Size: ${item[0].xLabel}`
-                      }
-                    },
-                    scales: {
-                      yAxes: [{
-                        id: 'left',
-                        type: 'linear',
-                        position: 'left',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }, {
-                        id: 'right',
-                        type: 'linear',
-                        position: 'right',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }]
-                    }
-                  }
-                });
-              }
-            });
-          });
-
-        </script>
       </div>
       <div class='canvas-inside'>
         <canvas id="shell0-2" class="chartjs" width="640" height="400"></canvas>
-        <script>
-          $(document).ready(function() {
-            $.ajax({
-              type: "GET",
-              url: "shell0Reversed.csv",
-              dataType: "text",
-              success: data => {
-                const {
-                  headers,
-                  lines
-                } = processData(data);
-                const info = transpose(lines);
-                console.log(info);
-                const bubbleSortedChart = new Chart(document.getElementById("shell0-2"), {
-                  "type": "bar",
-                  "data": {
-                    "labels": info[1],
-                    "datasets": [{
-                        "label": "Time",
-                        "data": info[3],
-                        'type': 'line',
-                        fill: true,
-                        "borderColor": "rgb(192, 75, 192)",
-                        "lineTension": 0.5,
-                        yAxisID: 'right'
-                      },
-                      {
-                        "label": "Changes",
-                        "data": info[2],
-                        backgroundColor: 'rgb(160, 200, 24)',
-                        "lineTension": 0.5,
-                        yAxesIdsID: 'left'
-                      }
-                    ]
-                  },
-                  options: {
-                    title: {
-                      display: true,
-                      text: 'Shell Sort (Shell Sequence) - REVERSED'
-                    },
-                    tooltips: {
-                      callbacks: {
-                        title: (item, data) => `Size: ${item[0].xLabel}`
-                      }
-                    },
-                    scales: {
-                      yAxes: [{
-                        id: 'left',
-                        type: 'linear',
-                        position: 'left',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }, {
-                        id: 'right',
-                        type: 'linear',
-                        position: 'right',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }]
-                    }
-                  }
-                });
-              }
-            });
-          });
-
-        </script>
       </div>
       <div class='canvas-inside'>
         <canvas id="shell0-3" class="chartjs" width="640" height="400"></canvas>
-        <script>
-          $(document).ready(function() {
-            $.ajax({
-              type: "GET",
-              url: "shell0Random.csv",
-              dataType: "text",
-              success: data => {
-                const {
-                  headers,
-                  lines
-                } = processData(data);
-                const info = transpose(lines);
-                console.log(info);
-                const bubbleSortedChart = new Chart(document.getElementById("shell0-3"), {
-                  "type": "bar",
-                  "data": {
-                    "labels": info[1],
-                    "datasets": [{
-                        "label": "Time",
-                        "data": info[3],
-                        'type': 'line',
-                        fill: true,
-                        "borderColor": "rgb(192, 75, 192)",
-                        "lineTension": 0.5,
-                        yAxisID: 'right'
-                      },
-                      {
-                        "label": "Changes",
-                        "data": info[2],
-                        backgroundColor: 'rgb(160, 200, 24)',
-                        "lineTension": 0.5,
-                        yAxesIdsID: 'left'
-                      }
-                    ]
-                  },
-                  options: {
-                    title: {
-                      display: true,
-                      text: 'Shell Sort (Shell Sequence) - RANDOM (Logarithmic scale)'
-                    },
-                    tooltips: {
-                      callbacks: {
-                        title: (item, data) => `Size: ${item[0].xLabel}`
-                      }
-                    },
-                    scales: {
-                      yAxes: [{
-                        id: 'left',
-                        type: 'logarithmic',
-                        position: 'left',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }, {
-                        id: 'right',
-                        type: 'logarithmic',
-                        position: 'right',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }]
-                    }
-                  }
-                });
-              }
-            });
-          });
-
-        </script>
       </div>
       <div class='canvas-inside'>
         <canvas id="shell1-1" class="chartjs" width="640" height="400"></canvas>
-        <script>
-          $(document).ready(function() {
-            $.ajax({
-              type: "GET",
-              url: "shell1Sorted.csv",
-              dataType: "text",
-              success: data => {
-                const {
-                  headers,
-                  lines
-                } = processData(data);
-                const info = transpose(lines);
-                console.log(info);
-                const bubbleSortedChart = new Chart(document.getElementById("shell1-1"), {
-                  "type": "bar",
-                  "data": {
-                    "labels": info[1],
-                    "datasets": [{
-                        "label": "Changes",
-                        "data": info[2],
-                        "fill": false,
-                        backgroundColor: 'rgb(160, 200, 24)',
-                        "lineTension": 0.5
-                      },
-                      {
-                        "label": "Time",
-                        "data": info[3],
-                        'type': 'line',
-                        "borderColor": "rgb(192, 75, 192)",
-                        "lineTension": 0.5,
-                        yAxesId: 'right'
-                      }
-                    ]
-                  },
-                  options: {
-                    title: {
-                      display: true,
-                      text: 'Shell Sort (Knuth Sequence) - SORTED'
-                    },
-                    tooltips: {
-                      callbacks: {
-                        title: (item, data) => `Size: ${item[0].xLabel}`
-                      }
-                    },
-                    scales: {
-                      yAxes: [{
-                        id: 'left',
-                        type: 'linear',
-                        position: 'left',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }, {
-                        id: 'right',
-                        type: 'linear',
-                        position: 'right',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }]
-                    }
-                  }
-                });
-              }
-            });
-          });
-
-        </script>
       </div>
       <div class='canvas-inside'>
         <canvas id="shell1-2" class="chartjs" width="640" height="400"></canvas>
-        <script>
-          $(document).ready(function() {
-            $.ajax({
-              type: "GET",
-              url: "shell1Reversed.csv",
-              dataType: "text",
-              success: data => {
-                const {
-                  headers,
-                  lines
-                } = processData(data);
-                const info = transpose(lines);
-                console.log(info);
-                const bubbleSortedChart = new Chart(document.getElementById("shell1-2"), {
-                  "type": "bar",
-                  "data": {
-                    "labels": info[1],
-                    "datasets": [{
-                        "label": "Time",
-                        "data": info[3],
-                        'type': 'line',
-                        fill: true,
-                        "borderColor": "rgb(192, 75, 192)",
-                        "lineTension": 0.5,
-                        yAxisID: 'right'
-                      },
-                      {
-                        "label": "Changes",
-                        "data": info[2],
-                        backgroundColor: 'rgb(160, 200, 24)',
-                        "lineTension": 0.5,
-                        yAxesIdsID: 'left'
-                      }
-                    ]
-                  },
-                  options: {
-                    title: {
-                      display: true,
-                      text: 'Shell Sort (Knuth Sequence) - REVERSED'
-                    },
-                    tooltips: {
-                      callbacks: {
-                        title: (item, data) => `Size: ${item[0].xLabel}`
-                      }
-                    },
-                    scales: {
-                      yAxes: [{
-                        id: 'left',
-                        type: 'linear',
-                        position: 'left',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }, {
-                        id: 'right',
-                        type: 'linear',
-                        position: 'right',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }]
-                    }
-                  }
-                });
-              }
-            });
-          });
-
-        </script>
       </div>
       <div class='canvas-inside'>
         <canvas id="shell1-3" class="chartjs" width="640" height="400"></canvas>
-        <script>
-          $(document).ready(function() {
-            $.ajax({
-              type: "GET",
-              url: "shell1Random.csv",
-              dataType: "text",
-              success: data => {
-                const {
-                  headers,
-                  lines
-                } = processData(data);
-                const info = transpose(lines);
-                console.log(info);
-                const bubbleSortedChart = new Chart(document.getElementById("shell1-3"), {
-                  "type": "bar",
-                  "data": {
-                    "labels": info[1],
-                    "datasets": [{
-                        "label": "Time",
-                        "data": info[3],
-                        'type': 'line',
-                        fill: true,
-                        "borderColor": "rgb(192, 75, 192)",
-                        "lineTension": 0.5,
-                        yAxisID: 'right'
-                      },
-                      {
-                        "label": "Changes",
-                        "data": info[2],
-                        backgroundColor: 'rgb(160, 200, 24)',
-                        "lineTension": 0.5,
-                        yAxesIdsID: 'left'
-                      }
-                    ]
-                  },
-                  options: {
-                    title: {
-                      display: true,
-                      text: 'Shell Sort (Knuth Sequence) - RANDOM (Logarithmic scale)'
-                    },
-                    tooltips: {
-                      callbacks: {
-                        title: (item, data) => `Size: ${item[0].xLabel}`
-                      }
-                    },
-                    scales: {
-                      yAxes: [{
-                        id: 'left',
-                        type: 'logarithmic',
-                        position: 'left',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }, {
-                        id: 'right',
-                        type: 'logarithmic',
-                        position: 'right',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }]
-                    }
-                  }
-                });
-              }
-            });
-          });
-
-        </script>
       </div>
       <div class='canvas-inside'>
         <canvas id="shell2-1" class="chartjs" width="640" height="400"></canvas>
-        <script>
-          $(document).ready(function() {
-            $.ajax({
-              type: "GET",
-              url: "shell2Sorted.csv",
-              dataType: "text",
-              success: data => {
-                const {
-                  headers,
-                  lines
-                } = processData(data);
-                const info = transpose(lines);
-                console.log(info);
-                const bubbleSortedChart = new Chart(document.getElementById("shell2-1"), {
-                  "type": "bar",
-                  "data": {
-                    "labels": info[1],
-                    "datasets": [{
-                        "label": "Changes",
-                        "data": info[2],
-                        "fill": false,
-                        backgroundColor: 'rgb(160, 200, 24)',
-                        "lineTension": 0.5
-                      },
-                      {
-                        "label": "Time",
-                        "data": info[3],
-                        'type': 'line',
-                        "borderColor": "rgb(192, 75, 192)",
-                        "lineTension": 0.5,
-                        yAxesId: 'right'
-                      }
-                    ]
-                  },
-                  options: {
-                    title: {
-                      display: true,
-                      text: 'Shell Sort (Tokuda Sequence) - SORTED'
-                    },
-                    tooltips: {
-                      callbacks: {
-                        title: (item, data) => `Size: ${item[0].xLabel}`
-                      }
-                    },
-                    scales: {
-                      yAxes: [{
-                        id: 'left',
-                        type: 'linear',
-                        position: 'left',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }, {
-                        id: 'right',
-                        type: 'linear',
-                        position: 'right',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }]
-                    }
-                  }
-                });
-              }
-            });
-          });
-
-        </script>
       </div>
       <div class='canvas-inside'>
         <canvas id="shell2-2" class="chartjs" width="640" height="400"></canvas>
-        <script>
-          $(document).ready(function() {
-            $.ajax({
-              type: "GET",
-              url: "shell2Reversed.csv",
-              dataType: "text",
-              success: data => {
-                const {
-                  headers,
-                  lines
-                } = processData(data);
-                const info = transpose(lines);
-                console.log(info);
-                const bubbleSortedChart = new Chart(document.getElementById("shell2-2"), {
-                  "type": "bar",
-                  "data": {
-                    "labels": info[1],
-                    "datasets": [{
-                        "label": "Time",
-                        "data": info[3],
-                        'type': 'line',
-                        fill: true,
-                        "borderColor": "rgb(192, 75, 192)",
-                        "lineTension": 0.5,
-                        yAxisID: 'right'
-                      },
-                      {
-                        "label": "Changes",
-                        "data": info[2],
-                        backgroundColor: 'rgb(160, 200, 24)',
-                        "lineTension": 0.5,
-                        yAxesIdsID: 'left'
-                      }
-                    ]
-                  },
-                  options: {
-                    title: {
-                      display: true,
-                      text: 'Shell Sort (Tokuda Sequence) - REVERSED'
-                    },
-                    tooltips: {
-                      callbacks: {
-                        title: (item, data) => `Size: ${item[0].xLabel}`
-                      }
-                    },
-                    scales: {
-                      yAxes: [{
-                        id: 'left',
-                        type: 'linear',
-                        position: 'left',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }, {
-                        id: 'right',
-                        type: 'linear',
-                        position: 'right',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }]
-                    }
-                  }
-                });
-              }
-            });
-          });
-
-        </script>
       </div>
       <div class='canvas-inside'>
         <canvas id="shell2-3" class="chartjs" width="640" height="400"></canvas>
-        <script>
-          $(document).ready(function() {
-            $.ajax({
-              type: "GET",
-              url: "shell2Random.csv",
-              dataType: "text",
-              success: data => {
-                const {
-                  headers,
-                  lines
-                } = processData(data);
-                const info = transpose(lines);
-                console.log(info);
-                const bubbleSortedChart = new Chart(document.getElementById("shell2-3"), {
-                  "type": "bar",
-                  "data": {
-                    "labels": info[1],
-                    "datasets": [{
-                        "label": "Time",
-                        "data": info[3],
-                        'type': 'line',
-                        fill: true,
-                        "borderColor": "rgb(192, 75, 192)",
-                        "lineTension": 0.5,
-                        yAxisID: 'right'
-                      },
-                      {
-                        "label": "Changes",
-                        "data": info[2],
-                        backgroundColor: 'rgb(160, 200, 24)',
-                        "lineTension": 0.5,
-                        yAxesIdsID: 'left'
-                      }
-                    ]
-                  },
-                  options: {
-                    title: {
-                      display: true,
-                      text: 'Shell Sort (Tokuda Sequence) - RANDOM (Logarithmic scale)'
-                    },
-                    tooltips: {
-                      callbacks: {
-                        title: (item, data) => `Size: ${item[0].xLabel}`
-                      }
-                    },
-                    scales: {
-                      yAxes: [{
-                        id: 'left',
-                        type: 'logarithmic',
-                        position: 'left',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }, {
-                        id: 'right',
-                        type: 'logarithmic',
-                        position: 'right',
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }]
-                    }
-                  }
-                });
-              }
-            });
-          });
-
-        </script>
       </div>
       <p>Wow, we have a lot of data here! As you can see, it is pretty BAD at sorting already sorted arrays in comparison to the others sorting algorithms. That would be easily solved by adding a check to see if it is already sorted (although, it wouldn't
         solve "almost sorted" arrays" long time). A HUGE improvement can be observed in the last two, as they only take roughly 0.1s to sort the same thing Insertion took 43 seconds!!!!11!.</p>
-      <p>Weirdly enough, Knuth and Tokuda sequynces got pretty close, not exactly saying which one is better, which is plausible, as Tokuda one doesnt have a time-complexity well-established. Anyway, we will have some comparisons to see that difference better
+      <p>Weirdly enough, Knuth and Tokuda sequences got pretty close, not exactly saying which one is better, which is plausible, as Tokuda one doesnt have a time-complexity well-established. Anyway, we will have some comparisons to see that difference better
         in some charts below.).</p>
       <br/>
 
-      <h3>Conclusion 👍</h3>
-      <p>This is over for today! Hope you enjoyed the article, and that it gave you some insights another ones didn't gave you, as it took a lot of time from me. Wait for similar stuff for the other sorting algorithms!</p>
+      <h3>Conclusion and + Charts 👍</h3>
+      <p>This is over for today! Hope you enjoyed the article, and that it gave you some insights another ones didn't gave you, as it took a lot of time from me. Wait for similar stuff for the other sorting algorithms! Take a look in the below charts, with
+        some directly comparisons between the different sorting algorithms, remembering that the 3 \(\Theta(n^2)\) algorithms only have data until size \(2^{18}\), while the 3 Shell ones go up until \(2^{28}\).</p>
+      <div class='canvas-inside'>
+        <canvas id="sorted" class="chartjs" width="640" height="400"></canvas>
+      </div>
+      <div class='canvas-inside'>
+        <canvas id="reversed" class="chartjs" width="640" height="400"></canvas>
+      </div>
+      <div class='canvas-inside'>
+        <canvas id="random" class="chartjs" width="640" height="400"></canvas>
+      </div>
+      <div class='canvas-inside'>
+        <canvas id="shell-random" class="chartjs" width="640" height="400"></canvas>
+      </div>
 
-      <br/>
+      <br/><br/>
       <h3>Playground ⏳</h3>
       <p>This algorithms were also "translated" to JavaScript which can be acessed through the API below. Make some exploration and discover what you can do with it. Hope you enjoyed, and see you next time!</p>
+      <div class="card">
+        <div class="card-body">
+          <form>
+            <div class="form-group">
+              <label for="sortingAlgorithm">Sorting Algorithm</label>
+              <select class="form-control" id="sortingAlgorithm">
+                <option value='bubble'>Bubble Sort</option>
+                <option value='insertion'>Insertion Sort</option>
+                <option value='binaryInsertion'>Binary Insertion Sort</option>
+                <option value='shell/0'>Shell Sort - Shell Sequence</option>
+                <option value='shell/1'>Shell Sort - Knuth Sequence</option>
+                <option value='shell/2'>Shell Sort - Tokuda Sequence</option>
+               </select>
+            </div>
+            <div class="form-group">
+              <label for="arrayType">Array Type</label>
+              <select class="form-control" id="arrayType">
+                <option value='sorted'>Sorted Array</option>
+                <option value='reversed'>Reversed Array</option>
+                <option value='random'>Random Array</option>
+                <option value='custom' selected="selected">Custom Array</option>
+               </select>
+            </div>
+            <div id="arraySizeDiv" class="form-group" style="display: none">
+              <label for="arraySize">Array Size</label>
+              <input type="text" class="form-control" id="arraySize">
+              <small id="arraySizeHelp" class="form-text text-muted">Insert a valid positive number</small>
+            </div>
+            <div id="customFieldDiv" class="form-group">
+              <label id="labelCustomField" for="customField">Custom field</label>
+              <input type="text" class="form-control" id="customField" placeholder="1 2 3 4" required="required">
+              <small id="customFieldHelp" class="form-text text-muted">Insert numbers with a space between them</small>
+            </div>
+            <button id="submitButton" type="submit" class="btn btn-primary">Go</button>
+          </form>
+          <hr/>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Sorting Algorithm</th>
+                <th scope="col">Array Type</th>
+                <th scope="col">Array Size</th>
+                <th scope="col">Time</th>
+                <th scope="col">Changes</th>
+              </tr>
+            </thead>
+            <tbody id="playgroundTable">
+              <tr id="information">
+                <td colspan="5">Nothing yet, please make a request here ^</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
 
     </article>
     <footer><a href="www.inf.ufrgs.br/~rbaudibert">Website</a> | <a href="https://github.com/rafaeelaudibert">GitHub</a> | <a href="https://www.facebook.com/rafaeelaudibert">Facebook</a>
@@ -1618,6 +450,64 @@
     <script src="highlight.pack.js"></script>
     <script>
       hljs.initHighlightingOnLoad();
+      const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1);
+
+
+      $('#submitButton').click(e => {
+        e.preventDefault();
+
+        const sortingAlgorithm = $('#sortingAlgorithm')[0].value;
+        const arrayType = $('#arrayType')[0].value;
+        const arraySize = parseInt($('#arraySize')[0].value);
+        const customValue = $('#customField')[0].value.split(' ').map(parseFloat);
+
+        if (arrayType == 'custom' && customValue[0] != NaN) {
+          $.ajax(`${arrayType}/${sortingAlgorithm}/${customValue}`).then(data => {
+            $('#information').hide(0);
+            const table = $('#playgroundTable');
+            const {
+              changes,
+              ordered,
+              time
+            } = data;
+            const row = $('<tr></tr>').append($('<td></td>').append(table.children.length - 1)).append($('<td></td>').append(capitalize(sortingAlgorithm))).append($('<td></td>').append(capitalize(arrayType))).append($('<td></td>').append(
+              customValue.length)).append($(
+              '<td></td>').append(time)).append($(
+              '<td></td>').append(
+              changes));
+            table.append(row);
+          });
+
+        } else if (arrayType != 'custom' && arraySize != NaN) {
+          $.ajax(`${arrayType}/${sortingAlgorithm}/${arraySize}`).then(data => {
+            $('#information').hide(0);
+            const table = $('#playgroundTable');
+            const {
+              changes,
+              ordered,
+              time
+            } = data;
+            const row = $('<tr></tr>').append($('<td></td>').append(table.children.length - 1)).append($('<td></td>').append(capitalize(sortingAlgorithm))).append($('<td></td>').append(capitalize(arrayType))).append($('<td></td>').append(
+              arraySize)).append($(
+              '<td></td>').append(time)).append($(
+              '<td></td>').append(
+              changes));
+            table.append(row);
+          });
+        } else {
+          console.log('ERRO!');
+        }
+      })
+
+      $('#arrayType').change(e => {
+        if (e.target.value == 'custom') {
+          $('#customFieldDiv').show(0)
+          $('#arraySizeDiv').hide(0)
+        } else {
+          $('#customFieldDiv').hide(0)
+          $('#arraySizeDiv').show(0)
+        }
+      });
 
     </script>
   </body>

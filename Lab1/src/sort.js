@@ -101,7 +101,7 @@ module.exports = class Sort {
 		};
 	}
 
-	static insertionShellSort(array, h, f) {
+	static async insertionShellSort(array, h, f) {
 		let changes = 0;
 		for (let j = f + h; j < array.length; j += h) {
 			let key = array[j];
@@ -126,7 +126,7 @@ module.exports = class Sort {
 		for (let i = sequence.length = 1; i >= 0; i--) {
 			let h = sequence[i];
 			for (let f = 0; f < h; f++) {
-				changes += this.insertionShellSort(array, h, f);
+				changes += await this.insertionShellSort(array, h, f);
 			}
 		}
 		const diff = process.hrtime(time);

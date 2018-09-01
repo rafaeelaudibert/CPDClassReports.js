@@ -12,25 +12,25 @@ const app = express();
 
 /* SORTED ARRAYS */
 routes.prefix('/sorted', sorted => {
-  sorted.get('/bubble/:size', (req, res) => {
+  sorted.get('/bubble/:size', async (req, res) => {
     Sort.createSortedArray(req.params.size)
       .then(array => Sort.bubbleSort(array))
       .then(data => res.json(data))
       .catch(err => res.send(err));
   });
-  sorted.get('/insertion/:size', (req, res) => {
+  sorted.get('/insertion/:size', async (req, res) => {
     Sort.createSortedArray(req.params.size)
       .then(array => Sort.insertionSort(array))
       .then(data => res.json(data))
       .catch(err => res.send(err));
   });
-  sorted.get('/binaryInsertion/:size', (req, res) => {
+  sorted.get('/binaryInsertion/:size', async (req, res) => {
     Sort.createSortedArray(req.params.size)
       .then(array => Sort.binaryInsertionSort(array))
       .then(data => res.json(data))
       .catch(err => res.send(err));
   });
-  sorted.get('/shell/:id/:size', (req, res) => {
+  sorted.get('/shell/:id/:size', async (req, res) => {
     Sort.createSortedArray(req.params.size)
       .then(array => Sort.shellSort(array, req.params.id))
       .then(data => res.json(data))
@@ -40,25 +40,25 @@ routes.prefix('/sorted', sorted => {
 
 /* REVERSED ARRAYS */
 routes.prefix('/reversed', reversed => {
-  reversed.get('/bubble/:size', (req, res) => {
+  reversed.get('/bubble/:size', async (req, res) => {
     Sort.createReversedArray(req.params.size)
       .then(array => Sort.bubbleSort(array))
       .then(data => res.json(data))
       .catch(err => res.send(err));
   });
-  reversed.get('/insertion/:size', (req, res) => {
+  reversed.get('/insertion/:size', async (req, res) => {
     Sort.createReversedArray(req.params.size)
       .then(array => Sort.insertionSort(array))
       .then(data => res.json(data))
       .catch(err => res.send(err));
   });
-  reversed.get('/binaryInsertion/:size', (req, res) => {
+  reversed.get('/binaryInsertion/:size', async (req, res) => {
     Sort.createReversedArray(req.params.size)
       .then(array => Sort.binaryInsertionSort(array))
       .then(data => res.json(data))
       .catch(err => res.send(err));
   });
-  reversed.get('/shell/:id/:size', (req, res) => {
+  reversed.get('/shell/:id/:size', async (req, res) => {
     Sort.createReversedArray(req.params.size)
       .then(array => Sort.shellSort(array, req.params.id))
       .then(data => res.json(data))
@@ -69,31 +69,67 @@ routes.prefix('/reversed', reversed => {
 
 /* RANDOM ARRAYS */
 routes.prefix('/random', random => {
-  random.get('/bubble/:size', (req, res) => {
+  random.get('/bubble/:size', async (req, res) => {
     Sort.createRandomArray(req.params.size)
       .then(array => Sort.bubbleSort(array))
       .then(data => res.json(data))
       .catch(err => res.send(err));
   });
-  random.get('/insertion/:size', (req, res) => {
+  random.get('/insertion/:size', async (req, res) => {
     Sort.createRandomArray(req.params.size)
       .then(array => Sort.insertionSort(array))
       .then(data => res.json(data))
       .catch(err => res.send(err));
   });
-  random.get('/binaryInsertion/:size', (req, res) => {
+  random.get('/binaryInsertion/:size', async (req, res) => {
     Sort.createRandomArray(req.params.size)
       .then(array => Sort.binaryInsertionSort(array))
       .then(data => res.json(data))
       .catch(err => res.send(err));
   });
-  random.get('/shell/:id/:size', (req, res) => {
+  random.get('/shell/:id/:size', async (req, res) => {
     Sort.createRandomArray(req.params.size)
       .then(array => Sort.shellSort(array, req.params.id))
       .then(data => res.json(data))
       .catch(err => console.error("Shit", err));
   });
 });
+
+/* CUSTOM ARRAYS */
+routes.prefix('/custom', sorted => {
+  sorted.get('/bubble/:array', async (req, res) => {
+    console.log(req.params.array.split(','));
+    Sort.bubbleSort(req.params.array.split(','))
+      .then(data => res.json(data))
+      .catch(err => res.send(err));
+  });
+  sorted.get('/insertion/:array', async (req, res) => {
+    Sort.createSortedArray(req.params.size)
+      .then(array => Sort.insertionSort(array))
+      .then(data => res.json(data))
+      .catch(err => res.send(err));
+  });
+  sorted.get('/binaryInsertion/:array', async (req, res) => {
+    Sort.createSortedArray(req.params.size)
+      .then(array => Sort.binaryInsertionSort(array))
+      .then(data => res.json(data))
+      .catch(err => res.send(err));
+  });
+  sorted.get('/shell/:id/:array', async (req, res) => {
+    Sort.createSortedArray(req.params.size)
+      .then(array => Sort.shellSort(array, req.params.id))
+      .then(data => res.json(data))
+      .catch(err => console.error("Shit", err));
+  });
+});
+
+// let startTime;
+// setInterval(function() {
+//     if (!startTime) {
+//         startTime = Date.now();
+//     }
+//     console.log((Date.now() - startTime) / 1000);
+// }, 100)
 
 app.use(routes);
 app.use(express.static('src/assets'));
