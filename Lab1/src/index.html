@@ -384,7 +384,10 @@
 
       <br/><br/>
       <h3>Playground ⏳</h3>
-      <p>This algorithms were also "translated" to JavaScript which can be acessed through the API below. Make some exploration and discover what you can do with it. Hope you enjoyed, and see you next time!</p>
+      <p>This algorithms were also "translated" to JavaScript which can be acessed through the API below. I wish this was non-blocking requests, so that you could make more than one request and receive all of them as soon as they finish ther computation,
+        but I couldn't, so be careful with some big numbers, as it will execute all the queries in order, until you restart the server. Make some exploration and discover what you can do with it. You can see that running it in assyncronous Javascript
+        makes it REALLY faster when using Bubble or Insertion sort, although it makes Shell algorithm slower (we can't process a lot of things at the same time, as we must make all the different sequence values of \(h\) in order).Hope you enjoyed, and
+        see you next time!</p>
       <div class="card">
         <div class="card-body">
           <form>
@@ -415,13 +418,13 @@
             </div>
             <div id="customFieldDiv" class="form-group">
               <label id="labelCustomField" for="customField">Custom field</label>
-              <input type="text" class="form-control" id="customField" placeholder="1 2 3 4" required="required">
+              <input type="text" class="form-control" id="customField" placeholder="1 2 3 4">
               <small id="customFieldHelp" class="form-text text-muted">Insert numbers with a space between them</small>
             </div>
             <button id="submitButton" type="submit" class="btn btn-primary">Go</button>
           </form>
           <hr/>
-          <table class="table">
+          <table class="table table-hover">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -434,7 +437,8 @@
             </thead>
             <tbody id="playgroundTable">
               <tr id="information">
-                <td colspan="5">Nothing yet, please make a request here ^</td>
+                <td></td>
+                <td colspan="5">Nothing here yet, you should make requests there, so that I can show u smth ⬆️</td>
               </tr>
             </tbody>
           </table>
@@ -461,7 +465,7 @@
         const arraySize = parseInt($('#arraySize')[0].value);
         const customValue = $('#customField')[0].value.split(' ').map(parseFloat);
 
-        if (arrayType == 'custom' && customValue[0] != NaN) {
+        if (arrayType == 'custom' && !isNaN(customValue[0])) {
           $.ajax(`${arrayType}/${sortingAlgorithm}/${customValue}`).then(data => {
             $('#information').hide(0);
             const table = $('#playgroundTable');
@@ -470,15 +474,15 @@
               ordered,
               time
             } = data;
-            const row = $('<tr></tr>').append($('<td></td>').append(table.children.length - 1)).append($('<td></td>').append(capitalize(sortingAlgorithm))).append($('<td></td>').append(capitalize(arrayType))).append($('<td></td>').append(
-              customValue.length)).append($(
+            table.append($('<tr></tr>').append($('<td></td>').append(table[0].children.length)).append($('<td></td>').append(capitalize(sortingAlgorithm))).append($('<td></td>').append(capitalize(arrayType))).append($('<td></td>')
+              .append(
+                customValue.length)).append($(
               '<td></td>').append(time)).append($(
               '<td></td>').append(
-              changes));
-            table.append(row);
+              changes)));
           });
 
-        } else if (arrayType != 'custom' && arraySize != NaN) {
+        } else if (arrayType != 'custom' && !isNaN(arraySize)) {
           $.ajax(`${arrayType}/${sortingAlgorithm}/${arraySize}`).then(data => {
             $('#information').hide(0);
             const table = $('#playgroundTable');
@@ -487,15 +491,21 @@
               ordered,
               time
             } = data;
-            const row = $('<tr></tr>').append($('<td></td>').append(table.children.length - 1)).append($('<td></td>').append(capitalize(sortingAlgorithm))).append($('<td></td>').append(capitalize(arrayType))).append($('<td></td>').append(
-              arraySize)).append($(
+            table.append($('<tr></tr>').append($('<td></td>').append(table[0].children.length)).append($('<td></td>').append(capitalize(sortingAlgorithm))).append($('<td></td>').append(capitalize(arrayType))).append($('<td></td>')
+              .append(
+                arraySize)).append($(
               '<td></td>').append(time)).append($(
               '<td></td>').append(
-              changes));
-            table.append(row);
+              changes)));
           });
         } else {
-          console.log('ERRO!');
+          $('#information').hide(0);
+          const table = $('#playgroundTable');
+          table.append($('<tr></tr>').append($('<td></td>').append(table[0].children.length)).append($('<td></td>').append(capitalize(sortingAlgorithm))).append($('<td></td>').append(capitalize(arrayType))).append($('<td></td>').append(
+            'MÁ REQUISIÇÃO')).append($(
+            '<td></td>').append('-')).append($(
+            '<td></td>').append(
+            '-')));
         }
       })
 
