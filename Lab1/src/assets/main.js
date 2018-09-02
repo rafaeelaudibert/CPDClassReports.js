@@ -133,12 +133,12 @@ $('document')
 				options: {
 					pan: {
 						enabled: true,
-						mode: 'x'
+						mode: 'xy'
 					},
 					zoom: {
 						sensitivity: 0.5,
 						enabled: true,
-						mode: 'x'
+						mode: 'xy'
 					}
 				}
 			})
@@ -249,7 +249,7 @@ $('document')
 				arr0,
 				arr1,
 				arr2
-			} = generateArrays(50, n => 1, n => (2 * n * n) / (3 * n * n - 1), n => 1 / 3);
+			} = generateArrays(20.5, n => 1, n => (2 * n * n) / (3 * n * n - 1), n => 1 / 3, 0.5);
 			const complexity5 = new Chart(document.getElementById("complexity5"), {
 				type: "line",
 				data: {
@@ -361,19 +361,20 @@ $('document')
 							data: {
 								labels: info[1],
 								datasets: [{
-										label: "Changes",
-										data: info[2],
-										"fill": false,
-										backgroundColor: 'rgb(160, 200, 24)',
-										lineTension: 0.5
-									},
-									{
 										label: "Time",
 										data: info[3],
 										type: 'line',
+										fill: true,
 										borderColor: "rgb(192, 75, 192)",
 										lineTension: 0.5,
-										yAxesId: 'right'
+										yAxisID: 'right'
+									},
+									{
+										label: "Changes",
+										data: info[2],
+										backgroundColor: 'rgb(160, 200, 24)',
+										lineTension: 0.5,
+										yAxesIdsID: 'left'
 									}
 								]
 							},
@@ -542,6 +543,20 @@ $('document')
 								}
 							}
 						});
+
+						$('#bubbleScale')
+							.click(e => {
+								if (bubbleSortedChart.options.scales.yAxes[0].type == 'linear') {
+									bubbleSortedChart.options.scales.yAxes[0].type = 'logarithmic';
+									bubbleSortedChart.options.scales.yAxes[1].type = 'logarithmic';
+									bubbleSortedChart.options.title.text = 'Bubble Sort - RANDOM (Logarithmic scale)';
+								} else {
+									bubbleSortedChart.options.scales.yAxes[0].type = 'linear';
+									bubbleSortedChart.options.scales.yAxes[1].type = 'linear';
+									bubbleSortedChart.options.title.text = 'Bubble Sort - RANDOM';
+								}
+								bubbleSortedChart.update();
+							})
 					}
 				});
 			});
@@ -746,6 +761,20 @@ $('document')
 								}
 							}
 						});
+
+						$('#insertionScale')
+							.click(e => {
+								if (bubbleSortedChart.options.scales.yAxes[0].type == 'linear') {
+									bubbleSortedChart.options.scales.yAxes[0].type = 'logarithmic';
+									bubbleSortedChart.options.scales.yAxes[1].type = 'logarithmic';
+									bubbleSortedChart.options.title.text = 'Insertion Sort - RANDOM (Logarithmic scale)';
+								} else {
+									bubbleSortedChart.options.scales.yAxes[0].type = 'linear';
+									bubbleSortedChart.options.scales.yAxes[1].type = 'linear';
+									bubbleSortedChart.options.title.text = 'Insertion Sort - RANDOM';
+								}
+								bubbleSortedChart.update();
+							})
 					}
 				});
 			});
@@ -950,6 +979,20 @@ $('document')
 								}
 							}
 						});
+
+						$('#binaryScale')
+							.click(e => {
+								if (bubbleSortedChart.options.scales.yAxes[0].type == 'linear') {
+									bubbleSortedChart.options.scales.yAxes[0].type = 'logarithmic';
+									bubbleSortedChart.options.scales.yAxes[1].type = 'logarithmic';
+									bubbleSortedChart.options.title.text = 'Binary Insertion Sort - RANDOM (Logarithmic scale)';
+								} else {
+									bubbleSortedChart.options.scales.yAxes[0].type = 'linear';
+									bubbleSortedChart.options.scales.yAxes[1].type = 'linear';
+									bubbleSortedChart.options.title.text = 'Binary Insertion Sort - RANDOM';
+								}
+								bubbleSortedChart.update();
+							})
 					}
 				});
 			});
@@ -1154,6 +1197,20 @@ $('document')
 								}
 							}
 						});
+
+						$('#shell0Scale')
+							.click(e => {
+								if (bubbleSortedChart.options.scales.yAxes[0].type == 'linear') {
+									bubbleSortedChart.options.scales.yAxes[0].type = 'logarithmic';
+									bubbleSortedChart.options.scales.yAxes[1].type = 'logarithmic';
+									bubbleSortedChart.options.title.text = 'Shell Sort (Shell Sequence) - RANDOM (Logarithmic scale)';
+								} else {
+									bubbleSortedChart.options.scales.yAxes[0].type = 'linear';
+									bubbleSortedChart.options.scales.yAxes[1].type = 'linear';
+									bubbleSortedChart.options.title.text = 'Shell Sort (Shell Sequence) - RANDOM ';
+								}
+								bubbleSortedChart.update();
+							})
 					}
 				});
 			});
@@ -1357,6 +1414,20 @@ $('document')
 								}
 							}
 						});
+
+						$('#shell1Scale')
+							.click(e => {
+								if (bubbleSortedChart.options.scales.yAxes[0].type == 'linear') {
+									bubbleSortedChart.options.scales.yAxes[0].type = 'logarithmic';
+									bubbleSortedChart.options.scales.yAxes[1].type = 'logarithmic';
+									bubbleSortedChart.options.title.text = 'Shell Sort (Knuth Sequence) - RANDOM (Logarithmic scale)';
+								} else {
+									bubbleSortedChart.options.scales.yAxes[0].type = 'linear';
+									bubbleSortedChart.options.scales.yAxes[1].type = 'linear';
+									bubbleSortedChart.options.title.text = 'Shell Sort (Knuth Sequence) - RANDOM ';
+								}
+								bubbleSortedChart.update();
+							})
 					}
 				});
 			});
@@ -1560,7 +1631,23 @@ $('document')
 								}
 							}
 						});
+
+						$('#shell2Scale')
+							.click(e => {
+								if (bubbleSortedChart.options.scales.yAxes[0].type == 'linear') {
+									bubbleSortedChart.options.scales.yAxes[0].type = 'logarithmic';
+									bubbleSortedChart.options.scales.yAxes[1].type = 'logarithmic';
+									bubbleSortedChart.options.title.text = 'Shell Sort (Tokuda Sequence) - RANDOM (Logarithmic scale)';
+								} else {
+									bubbleSortedChart.options.scales.yAxes[0].type = 'linear';
+									bubbleSortedChart.options.scales.yAxes[1].type = 'linear';
+									bubbleSortedChart.options.title.text = 'Shell Sort (Tokuda Sequence) - RANDOM ';
+								}
+								bubbleSortedChart.update();
+							})
 					}
+
+
 				});
 			});
 
@@ -1624,10 +1711,10 @@ $('document')
 						]
 					},
 					options: {
-            title: {
-              display: true,
-              text: "Sorted array times"
-            },
+						title: {
+							display: true,
+							text: "Sorted array times"
+						},
 						pan: {
 							enabled: true,
 							mode: 'xy'
@@ -1636,9 +1723,30 @@ $('document')
 							sensitivity: 0.5,
 							enabled: true,
 							mode: 'xy'
+						},
+						scales: {
+							yAxes: [{
+								type: 'linear',
+								position: 'left',
+								ticks: {
+									beginAtZero: true
+								}
+							}]
 						}
 					}
 				})
+
+				$('#sortedScale')
+					.click(e => {
+						if (sortedChart.options.scales.yAxes[0].type == 'linear') {
+							sortedChart.options.scales.yAxes[0].type = 'logarithmic';
+							sortedChart.options.title.text = 'Sorted array times (Logarithmic scale)';
+						} else {
+							sortedChart.options.scales.yAxes[0].type = 'linear';
+							sortedChart.options.title.text = 'Sorted array times';
+						}
+						sortedChart.update();
+					})
 			})
 
 		$.when($.ajax('bubbleReversed.csv'),
@@ -1701,10 +1809,10 @@ $('document')
 						]
 					},
 					options: {
-            title: {
-              display: true,
-              text: "Reversed array times"
-            },
+						title: {
+							display: true,
+							text: "Reversed array times"
+						},
 						pan: {
 							enabled: true,
 							mode: 'xy'
@@ -1713,9 +1821,30 @@ $('document')
 							sensitivity: 0.5,
 							enabled: true,
 							mode: 'xy'
+						},
+						scales: {
+							yAxes: [{
+								type: 'linear',
+								position: 'left',
+								ticks: {
+									beginAtZero: true
+								}
+							}]
 						}
 					}
 				})
+
+				$('#reversedScale')
+					.click(e => {
+						if (sortedChart.options.scales.yAxes[0].type == 'linear') {
+							sortedChart.options.scales.yAxes[0].type = 'logarithmic';
+							sortedChart.options.title.text = 'Reversed array times (Logarithmic scale)';
+						} else {
+							sortedChart.options.scales.yAxes[0].type = 'linear';
+							sortedChart.options.title.text = 'Reversed array times';
+						}
+						sortedChart.update();
+					})
 			})
 
 		$.when($.ajax('bubbleRandom.csv'),
@@ -1778,10 +1907,10 @@ $('document')
 						]
 					},
 					options: {
-            title: {
-              display: true,
-              text: "Random array times"
-            },
+						title: {
+							display: true,
+							text: "Random array times"
+						},
 						pan: {
 							enabled: true,
 							mode: 'xy'
@@ -1790,71 +1919,113 @@ $('document')
 							sensitivity: 0.5,
 							enabled: true,
 							mode: 'xy'
+						},
+						scales: {
+							yAxes: [{
+								type: 'linear',
+								position: 'left',
+								ticks: {
+									beginAtZero: true
+								}
+							}]
 						}
 					}
 				})
+
+				$('#randomScale')
+					.click(e => {
+						if (sortedChart.options.scales.yAxes[0].type == 'linear') {
+							sortedChart.options.scales.yAxes[0].type = 'logarithmic';
+							sortedChart.options.title.text = 'Random array times (Logarithmic scale)';
+						} else {
+							sortedChart.options.scales.yAxes[0].type = 'linear';
+							sortedChart.options.title.text = 'Random array times';
+						}
+						sortedChart.update();
+					})
 			})
 
-      $.when($.ajax('shell0Random.csv'),
-  				$.ajax('shell1Random.csv'),
-  				$.ajax('shell2Random.csv'))
-  			.done((...data) => {
-  				let parsedData = data.map(each => processData(each[0]));
-  				let labels = parsedData.map(sort => transpose(sort['lines'])[0]);
-  				let times = parsedData.map(sort => transpose(sort['lines'])[3]);
-          labels[0].splice(21, 7);
-          labels[0].splice(0, 14);
-          times[0].splice(21, 7);
-          times[0].splice(0, 14);
-          times[1].splice(21, 7);
-          times[1].splice(0, 14);
-          times[2].splice(21, 7);
-          times[2].splice(0, 14);
+		$.when($.ajax('shell0Random.csv'),
+				$.ajax('shell1Random.csv'),
+				$.ajax('shell2Random.csv'))
+			.done((...data) => {
+				let parsedData = data.map(each => processData(each[0]));
+				let labels = parsedData.map(sort => transpose(sort['lines'])[0]);
+				let times = parsedData.map(sort => transpose(sort['lines'])[3]);
+				labels[0].splice(21, 7);
+				labels[0].splice(0, 14);
+				times[0].splice(21, 7);
+				times[0].splice(0, 14);
+				times[1].splice(21, 7);
+				times[1].splice(0, 14);
+				times[2].splice(21, 7);
+				times[2].splice(0, 14);
 
-  				const sortedChart = new Chart(document.getElementById("shell-random"), {
-  					type: "line",
-  					data: {
-  						labels: labels[0].map(n => Math.pow(2, n)),
-  						datasets: [{
-  								label: "Shell Sort - Shell Sequence",
-  								data: times[0],
-  								fill: false,
-  								borderColor: "rgb(75, 75, 192)",
-  								lineTension: 0.5
-  							},
-  							{
-  								label: "Shell Sort - Knuth Sequence",
-  								data: times[1],
-  								fill: false,
-  								borderColor: "rgb(192, 75, 75)",
-  								lineTension: 0.5
-  							},
-  							{
-  								label: "Shell Sort - Tokuda Sequence",
-  								data: times[2],
-  								fill: false,
-  								borderColor: "rgb(75, 192, 75)",
-  								lineTension: 0.5
-  							}
-  						]
-  					},
-  					options: {
-              title: {
-                display: true,
-                text: "Random array times ZOOMED  - Shell Algorithm"
-              },
-  						pan: {
-  							enabled: true,
-  							mode: 'xy'
-  						},
-  						zoom: {
-  							sensitivity: 0.5,
-  							enabled: true,
-  							mode: 'xy'
-  						}
-  					}
-  				})
-  			})
+				const sortedChart = new Chart(document.getElementById("shell-random"), {
+					type: "line",
+					data: {
+						labels: labels[0].map(n => Math.pow(2, n)),
+						datasets: [{
+								label: "Shell Sort - Shell Sequence",
+								data: times[0],
+								fill: false,
+								borderColor: "rgb(75, 75, 192)",
+								lineTension: 0.5
+							},
+							{
+								label: "Shell Sort - Knuth Sequence",
+								data: times[1],
+								fill: false,
+								borderColor: "rgb(192, 75, 75)",
+								lineTension: 0.5
+							},
+							{
+								label: "Shell Sort - Tokuda Sequence",
+								data: times[2],
+								fill: false,
+								borderColor: "rgb(75, 192, 75)",
+								lineTension: 0.5
+							}
+						]
+					},
+					options: {
+						title: {
+							display: true,
+							text: "Random array times ZOOMED  - Shell Algorithm"
+						},
+						pan: {
+							enabled: true,
+							mode: 'xy'
+						},
+						zoom: {
+							sensitivity: 0.5,
+							enabled: true,
+							mode: 'xy'
+						},
+						scales: {
+							yAxes: [{
+								type: 'linear',
+								position: 'left',
+								ticks: {
+									beginAtZero: true
+								}
+							}]
+						}
+					}
+				})
+
+				$('#zoomedScale')
+					.click(e => {
+						if (sortedChart.options.scales.yAxes[0].type == 'linear') {
+							sortedChart.options.scales.yAxes[0].type = 'logarithmic';
+							sortedChart.options.title.text = 'Random array times ZOOMED  - Shell Algorithm (Logarithmic scale)';
+						} else {
+							sortedChart.options.scales.yAxes[0].type = 'linear';
+							sortedChart.options.title.text = 'Random array times ZOOMED  - Shell Algorithm';
+						}
+						sortedChart.update();
+					})
+			})
 
 
 	});

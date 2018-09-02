@@ -189,10 +189,7 @@ module.exports = class Sort {
 						}
 						numElems--;
 						e = 1;
-						for (let i = 0; i < numElems; i++) {
-							seq[i] = e;
-							e *= 2;
-						}
+						for (let i = 0; i < numElems; i++, e = e << 1) seq[i] = e;
 						break;
 					case 1: // (Knuth,1971) - sequencia 1, 4, 13, 40, 121, 364, ...
 					case '1':
@@ -202,10 +199,7 @@ module.exports = class Sort {
 						}
 						numElems--;
 						e = 1;
-						for (let i = 0; i < numElems; i++) {
-							seq[i] = e;
-							e = e * 3 + 1;
-						}
+						for (let i = 0; i < numElems; i++, e = 3 * e + 1) seq[i] = e;
 						break;
 					case 2: // (Tokuda,1992) - sequencia 1, 4, 9, 20, 46, 103, ...
 					case '2':
@@ -215,10 +209,7 @@ module.exports = class Sort {
 							numElems++;
 						}
 						numElems--;
-						for (let i = 0; i < numElems; i++) {
-							e = (Math.ceil((9.0 * Math.pow(9.0, i) / Math.pow(4.0, i) - 4.0) / 5.0));
-							seq[i] = e;
-						}
+						for (let i = 0; i < numElems; i++) seq[i] = (Math.ceil((9.0 * Math.pow(9.0, i) / Math.pow(4.0, i) - 4.0) / 5.0));
 						break;
 					default:
 						throw new Error('Tipo de sequencia invalida');

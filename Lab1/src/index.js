@@ -14,6 +14,7 @@ const app = express();
 routes.prefix('/sorted', async sorted => {
 	sorted.get('/bubble/:size', async (req, res) => {
 		try {
+			console.log(`GET/ > Bubble/Sorted - Array Size: ${req.params.size}`)
 			arr = await Sort.createSortedArray(req.params.size);
 			data = await Sort.bubbleSort(arr)
 			res.json(data)
@@ -23,6 +24,7 @@ routes.prefix('/sorted', async sorted => {
 	});
 	sorted.get('/insertion/:size', async (req, res) => {
 		try {
+			console.log(`GET/ > Insertion/Sorted - Array Size: ${req.params.size}`)
 			arr = await Sort.createSortedArray(req.params.size);
 			data = await Sort.insertionSort(arr)
 			res.json(data)
@@ -32,6 +34,7 @@ routes.prefix('/sorted', async sorted => {
 	});
 	sorted.get('/binaryInsertion/:size', async (req, res) => {
 		try {
+			console.log(`GET/ > BinaryInsertion/Sorted - Array Size: ${req.params.size}`)
 			arr = await Sort.createSortedArray(req.params.size);
 			data = await Sort.binaryInsertionSort(arr)
 			res.json(data)
@@ -41,6 +44,7 @@ routes.prefix('/sorted', async sorted => {
 	});
 	sorted.get('/shell/:id/:size', async (req, res) => {
 		try {
+			console.log(`GET/ > Shell${req.params.id}/Sorted - Array Size: ${req.params.size}`)
 			arr = await Sort.createSortedArray(req.params.size)
 			data = await Sort.shellSort(arr, req.params.id)
 			res.json(data);
@@ -54,6 +58,7 @@ routes.prefix('/sorted', async sorted => {
 routes.prefix('/reversed', async reversed => {
 	reversed.get('/bubble/:size', async (req, res) => {
 		try {
+			console.log(`GET/ > Bubble/Reversed - Array Size: ${req.params.size}`)
 			arr = await Sort.createReversedArray(req.params.size);
 			data = await Sort.bubbleSort(arr)
 			res.json(data)
@@ -63,6 +68,7 @@ routes.prefix('/reversed', async reversed => {
 	});
 	reversed.get('/insertion/:size', async (req, res) => {
 		try {
+			console.log(`GET/ > Insertion/Reversed - Array Size: ${req.params.size}`)
 			arr = await Sort.createReversedArray(req.params.size);
 			data = await Sort.insertionSort(arr)
 			res.json(data)
@@ -72,6 +78,7 @@ routes.prefix('/reversed', async reversed => {
 	});
 	reversed.get('/binaryInsertion/:size', async (req, res) => {
 		try {
+			console.log(`GET/ > BinaryInsertion/Reversed - Array Size: ${req.params.size}`)
 			arr = await Sort.createReversedArray(req.params.size);
 			data = await Sort.binaryInsertionSort(arr)
 			res.json(data)
@@ -81,6 +88,7 @@ routes.prefix('/reversed', async reversed => {
 	});
 	reversed.get('/shell/:id/:size', async (req, res) => {
 		try {
+			console.log(`GET/ > Shell${req.params.id}/Reversed - Array Size: ${req.params.size}`)
 			arr = await Sort.createReversedArray(req.params.size)
 			data = await Sort.shellSort(arr, req.params.id)
 			res.json(data);
@@ -95,6 +103,7 @@ routes.prefix('/reversed', async reversed => {
 routes.prefix('/random', async random => {
 	random.get('/bubble/:size', async (req, res) => {
 		try {
+			console.log(`GET/ > Bubble/Random - Array Size: ${req.params.size}`)
 			arr = await Sort.createRandomArray(req.params.size);
 			data = await Sort.bubbleSort(arr)
 			res.json(data)
@@ -104,6 +113,7 @@ routes.prefix('/random', async random => {
 	});
 	random.get('/insertion/:size', async (req, res) => {
 		try {
+			console.log(`GET/ > Insertion/Random - Array Size: ${req.params.size}`)
 			arr = await Sort.createRandomArray(req.params.size);
 			data = await Sort.insertionSort(arr)
 			res.json(data)
@@ -113,6 +123,7 @@ routes.prefix('/random', async random => {
 	});
 	random.get('/binaryInsertion/:size', async (req, res) => {
 		try {
+			console.log(`GET/ > binaryInsertion/Random - Array Size: ${req.params.size}`)
 			arr = await Sort.createRandomArray(req.params.size);
 			data = await Sort.binaryInsertionSort(arr)
 			res.json(data)
@@ -122,6 +133,7 @@ routes.prefix('/random', async random => {
 	});
 	random.get('/shell/:id/:size', async (req, res) => {
 		try {
+			console.log(`GET/ > Shell${req.params.id}/Random - Array Size: ${req.params.size}`)
 			arr = await Sort.createRandomArray(req.params.size)
 			data = await Sort.shellSort(arr, req.params.id)
 			res.json(data);
@@ -135,6 +147,7 @@ routes.prefix('/random', async random => {
 routes.prefix('/custom', async custom => {
 	custom.get('/bubble/:array', async (req, res) => {
 		try {
+			console.log(`GET/ > Bubble/Custom - Array Size: ${req.params.array.split(',').length}`)
 			const data = await Sort.bubbleSort(req.params.array.split(','))
 			res.json(data)
 		} catch (e) {
@@ -143,6 +156,7 @@ routes.prefix('/custom', async custom => {
 	});
 	custom.get('/insertion/:array', async (req, res) => {
 		try {
+			console.log(`GET/ > Insertion/Custom - Array Size: ${req.params.array.split(',').length}`)
 			const data = await Sort.insertionSort(req.params.array.split(','))
 			res.json(data)
 		} catch (e) {
@@ -151,6 +165,7 @@ routes.prefix('/custom', async custom => {
 	});
 	custom.get('/binaryInsertion/:array', async (req, res) => {
 		try {
+			console.log(`GET/ > BinaryInsertion/Custom - Array Size: ${req.params.array.split(',').length}`)
 			const data = await Sort.binaryInsertionSort(req.params.array.split(','))
 			res.json(data)
 		} catch (e) {
@@ -159,6 +174,7 @@ routes.prefix('/custom', async custom => {
 	});
 	custom.get('/shell/:id/:array', async (req, res) => {
 		try {
+			console.log(`GET/ > Shell${req.params.id}/Custom - Array Size: ${req.params.array.split(',').length}`)
 			const data = await Sort.shellSort(req.params.array.split(','), req.params.id);
 			res.json(data);
 		} catch (e) {
@@ -184,4 +200,4 @@ app.use(async (req, res, next) => {
 app.get('/', async (req, res) => {
 	res.sendFile(path.join(__dirname + '/index.html'));
 });
-app.listen(5000, async () => console.log('App ready and running in port 5000!'));
+app.listen(5000, async () => console.log('Everything is ready! You can find it in localhost:5000'));

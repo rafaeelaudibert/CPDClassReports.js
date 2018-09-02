@@ -77,6 +77,11 @@ article {
     margin: 20px 0;
   }
 
+  .medium {
+    grid-column: 3 / -3;
+    margin: 0 0 20px;
+  }
+
   & > .aside {
     grid-column: 5 / -1;
     margin: 30px 20px;
@@ -105,6 +110,11 @@ article {
       content: "";
       display: inline-block;
       width: 100%;
+    }
+  }
+  @media screen and (max-width: 1298px) {
+    h1 {
+      height: 8rem;
     }
   }
 
