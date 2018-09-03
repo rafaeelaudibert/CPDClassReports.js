@@ -28,6 +28,7 @@
     "express": "^4.16.3",
     "express-namespace-routes": "0.0.3",
     "hirestime": "^3.2.1",
-    "morgan": "^1.9.0"
+    "morgan": "^1.9.0",
+    "start": "^5.1.0"
   }
 }
