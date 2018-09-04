@@ -119,7 +119,7 @@
           </div>
           <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
             <div class="card-body">
-              Maybe you can not see the complexity of this formula right in time, but if you remember from your Calculus classes, you will realize that a limit solves it with mastery, as \(\lim_{x\to\infty} {2n^2 \over 3n^2-1} = {2 \over 3}\). In conclusion, our time
+              Maybe you can not see the complexity of this formula right in time, but we can prove it with what we learned in our Calculus classes, as soon as we realize that a limit solves it with mastery, as \(\lim_{x\to\infty} {2n^2 \over 3n^2-1} = {2 \over 3}\). In conclusion, our time
               complexity is constant, or \(\Theta(1)\).
               <canvas id="complexity5" class="chartjs" width="undefined" height="undefined"></canvas>
             </div>
@@ -153,10 +153,10 @@
       <br/>
 
       <h3>Bubble Sort 🔁</h3>
-      <p>With a time complexity of \(\Theta(n^2)\), this algorithm is probably one of the worsts algorithms to sort something (if you want something worst, why don't you take a look at <a href="https://en.wikipedia.org/wiki/Bogosort">BogoSort</a> or
+      <p>With a time complexity of \(\Theta(n^2)\), this algorithm is probably one of the worsts algorithms to sort something (we can find something worst, like <a href="https://en.wikipedia.org/wiki/Bogosort">BogoSort</a> or
         <a href="https://pt.wikipedia.org/wiki/Sleep_sort">SleepSort 💤(in Portuguese)</a>?), as it takes a LOT of time to organize an array of values, as it compares adjacent pairs of numbers to see if they are in relative order.</p>
       <p>It was used arrays varying from \(2^1\) until \(2^{18}\) to generate the data below. The left y-axis shows the changes and the right one shows the time. As a reminder, the sorted charts may be a bit wrong in the time dataset, as explained before
-        in this article (tldr: OS interruptions can cause this).</p>
+        in this realtory (tldr: OS interruptions can cause this).</p>
       <p>The code used for it can be seen below, followe by the charts showing the data.</p>
 
       <!-- BubbleSort code -->
@@ -175,14 +175,13 @@
       <button id="bubbleScale" class='btn btn-primary float-right'>Change scale</button>
       <p><br/>Some information we can retrieve from this charts are that BubbleSort has best case complexity of \(\Theta(n)\) as it will only run through the array once, and stop, this is why it only makes 0 changes, and has such a small running time (0?).
         Reversed case really show us why he has such an assymptotic curve, going from 0.82s in the size 16384 to incredible 177s when in size 262144 (16x bigger size, 256x bigger time, as we would expect with a \(\Theta(n^2)\) complexity). To have some
-        fun, you can try to switch the y-axis scale back and forth between linear and logarthmic scale, to see some difference (the y-axis may be a bit glitched, showing numbers in cientific notation, couldn't figure it out how to make it looks better
-        🤔).
+        fun, you can try to switch the y-axis scale back and forth between linear and logarthmic scale, to see some difference (the y-axis may be a bit glitched, showing numbers in cientific notation, couldn't figure it out how to make it looks better 🤔).
         <br/><br/>
       </p>
 
 
       <h3>Insertion Sort ⤵️</h3>
-      <p>Let's move on to another simple sorting algorithm which we all learned in our 1st year at CS course. It also has a time complexity of \(\Theta(n^2)\), but we will be able to see some evolution, comparing to bubble Sort.</p>
+      <p>Let's move on to another simple sorting algorithm which we all learned in our 1st year at CS course. It also has a time complexity of \(\Theta(n^2)\), but we will be able to see some evolution, comparing to Bubble Sort.</p>
       <p>For this charts we also used arrays varying from \(2^1\) until \(2^{18}\) to generate the data below. All bla-bla-blas spoken about the BubbleSort are also valid here.</p>
       <p>The code used for it can be seen below, followed by the charts showing the data.</p>
 
@@ -200,13 +199,12 @@
         <canvas id="insertion-3" class="chartjs" width="640" height="400"></canvas>
       </div>
       <button id="insertionScale" class='btn btn-primary float-right'>Change scale</button>
-      <p><br/>Hello again, bro! How've you been? Long time, no see. I really like the Selection Sort idea, it's really a pity that it's a worst-case complexity of \(\Theta(n^2)\). 😞. Reversed chart shows us that it makes exactly the same changes as the
-        BubbleSort in reverse order, although it took less time, so point to Insertion ✨. In random data, it also runs A LOT faster than Bubble sort (in this sample casa, almost 3X faster). So, although both have an average-case time complexity of \(\Theta(n^2)\),
+      <p><br/>I really like the Selection Sort idea, it's really a pity that it's a worst-case complexity of \(\Theta(n^2)\). 😞. Reversed chart shows us that it makes exactly the same changes as BubbleSort in reverse order, although it took less time, so point to Insertion ✨. In random data, it also runs A LOT faster than Bubble sort (in this sample case, almost 3X faster). So, although both have an average-case time complexity of \(\Theta(n^2)\),
         it will only be the same assymptotically, as in "small" samples Insertion can be really faster. <br/><br/></p>
 
 
       <h3>Binary Insertion Sort ⤵️</h3>
-      <p>Now we will have a kind of evolution of the Insertion Sort Algorithm. As we are searching the place to insert our new number, in an already ordered arrray, it is pretty easy to think about a bynary search to find the exact place. So, let's see how
+      <p>Now we will have a kind of evolution of the Insertion Sort Algorithm. As we are searching the place to insert our new number, in an already ordered array, it is pretty easy to think about a bynary search (maybe one day I could try to implement a ternary search - really don't know if it would be gaster) to find the exact place where we should insert our number. So, let's see how
         the thing goes.</p>
       <p>Again, arrays size varying from \(2^1\) until \(2^{18}\) to generate the data below. Could have used a bigger data sample, because as you wil see, this is a bit faster than the last two, but to keep the comparison between them, we used the same
         data sample.
@@ -228,19 +226,19 @@
       </div>
       <button id="binaryScale" class='btn btn-primary float-right'>Change scale</button>
       <p><br/>As you can see, the changes occur the exactly same times both in Normal and Binary Insertion. The great advantage comes when we don't need to compare as many times as we would compare in a normal Insertion Sort, because we can find the place
-        we must inert ourselves in \(\log n\) time, giving us something around 30% of time, although having an average-case time complexity of \(\Theta(n^2)\), exactly the same as Bubble and Insertion Sort.<br/><br/></p>
+        we must insert ourselves in \(\log n\) time, giving us something around 30% of time, although having an average-case time complexity of \(\Theta(n^2)\), exactly the same as Bubble and Insertion Sort.<br/><br/></p>
 
 
       <h3>Shell Sort ⤵️</h3>
       <p>Let's start talking about the Shell, thinking about the Insertion. What is it really good about? Sorting ALMOST sortered stuff! And that's what the Shell sort abuses of, making the array each time more "sorted", making it faster to get fully sorted.
-        It uses something called <span class="formula" sequences></span> to order different pieces of the array at the same time (you can learn more about this <a href="https://en.wikipedia.org/wiki/Shellsort">here</a>. Here we used three different sequences,
+        It uses something called <span class="formula">sequences</span> to order different pieces of the array at the same time (you can see "all" of them <a href="https://en.wikipedia.org/wiki/Shellsort">here</a> (at least, the more famous ones). Here we used three different sequences,
         as follow:</p>
       <ul>
         <li>Shell Sequence (1, 2, 4, 8, 16, 32, ...)</li>
         <li>Knuth Sequence (1, 4, 13, 40, 121, 364, ...)</li>
         <li>Tokuda Sequence (1, 4, 9, 20, 46, 103, ...)</li>
       </ul>
-      <p>It is expected that each sequence makes the shell sort faster (although, as we will see, the last two have just a small difference), as they tend do decrease their time-complexity, with the Tokuda Sequence having a time-complexity not yet calculated,
+      <p>It is expected that each sequence makes the shell sort faster (although, as we will see, the last two have just a small difference, not exactly one being better than the other), as they tend do decrease their time-complexity, with the Tokuda Sequence having a time-complexity not yet calculated,
         but probably better than the Knuth one (\(O(N^(1+\sqrt{{8\ln(5/2) \over \ln(N)}}))\)) - too hard I know.</p>
       <p>This time, arrays size will vary from \(2^1\) until \(2^{28}\) to generate the data below, to all the sequences.</p>
       <p>The code used for it can be seen below, followed by the NINE charts (three for each sequence), showing the data. The gap sequence generation will be omitted for sake of brevity.</p>
@@ -285,14 +283,13 @@
         <canvas id="shell2-3" class="chartjs" width="640" height="400"></canvas>
       </div>
       <button id="shell2Scale" class='btn btn-primary float-right'>Change scale</button>
-      <p><br/>Wow, we have a lot of data here! As you can see, it is pretty BAD at sorting already sorted arrays in comparison to the others sorting algorithms. That would be easily solved by adding a check to see if it is already sorted (although, it wouldn't
-        solve "almost sorted" arrays" long time). A HUGE improvement can be observed in the last two, as they only take roughly 0.1s to sort the same thing Insertion took 43 seconds!!!!11!.</p>
-      <p>Weirdly enough, Knuth and Tokuda sequences got pretty close, not exactly saying which one is better, which is plausible, as Tokuda one doesnt have a time-complexity well-established. Anyway, we will have some comparisons to see that difference better
-        in some charts below.).<br/><br/></p>
+      <p><br/>Wow, we have a lot of data here! As you can see, it is pretty BAD at sorting already sorted arrays in comparison to the others sorting algorithms (you can see a comparison in the charts below). That would be easily solved by adding a check to see if it is already sorted (although, it wouldn't
+        solve "almost sorted" arrays long running time). A HUGE improvement can be observed in the last two, as they only take roughly 0.1s to sort the same thing Insertion took 43 seconds!!!!11!.</p>
+      <p>Weirdly enough, Knuth and Tokuda sequences got pretty close, not exactly saying which one is better, which is plausible, as Tokuda one doesnt have a time-complexity well-established. Anyway, we will have some comparisons to see that difference better in some charts below.).<br/><br/></p>
 
 
       <h3>Conclusion and + Charts 👍</h3>
-      <p>This is over for today! Hope you enjoyed the article, and that it gave you some insights another ones didn't gave you, as it took a lot of time from me. Wait for similar stuff for the other sorting algorithms! Take a look in the below charts, with
+      <p>This is over for today! Hope you enjoyed the relatory, and that it gave you some insights another ones didn't gave you, as it took a lot of time from me. Wait for similar stuff for the other sorting algorithms! Take a look in the below charts, with
         some directly comparisons between the different sorting algorithms, remembering that the three \(\Theta(n^2)\) algorithms only have data until size \(2^{18}\), while the three Shell ones go up until \(2^{28}\).</p>
       <div class='canvas-inside'>
         <canvas id="sorted" class="chartjs" width="640" height="400"></canvas>
@@ -395,7 +392,6 @@
     <script>
       const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1);
 
-
       $('#submitButton').click(e => {
         e.preventDefault();
 
@@ -460,9 +456,10 @@
 
       $('#resetTable').click(e => {
         const table = $('#playgroundTable');
+        const length = table[0].children.length
         $('#information').show(0);
-        table.children.split(1, table.length - 1);
-
+        for(let i=1; i<length; i++)
+          table[0].deleteRow(1);
       })
 
     </script>

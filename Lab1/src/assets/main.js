@@ -86,6 +86,12 @@ $('document')
             enabled: true,
             mode: 'x'
           },
+	        tooltips: {
+	          mode: 'label'
+	        },
+	        hover: {
+	          mode: 'dataset'
+	        },
           zoom: {
             sensitivity: 0.5,
             enabled: true,
@@ -135,6 +141,12 @@ $('document')
             enabled: true,
             mode: 'xy'
           },
+	        tooltips: {
+	          mode: 'label'
+	        },
+	        hover: {
+	          mode: 'dataset'
+	        },
           zoom: {
             sensitivity: 0.5,
             enabled: true,
@@ -184,6 +196,12 @@ $('document')
             enabled: true,
             mode: 'x'
           },
+	        tooltips: {
+	          mode: 'label'
+	        },
+	        hover: {
+	          mode: 'dataset'
+	        },
           zoom: {
             sensitivity: 0.5,
             enabled: true,
@@ -233,6 +251,12 @@ $('document')
             enabled: true,
             mode: 'xy'
           },
+	        tooltips: {
+	          mode: 'label'
+	        },
+	        hover: {
+	          mode: 'dataset'
+	        },
           zoom: {
             sensitivity: 0.5,
             enabled: true,
@@ -282,6 +306,12 @@ $('document')
             enabled: true,
             mode: 'x'
           },
+	        tooltips: {
+	          mode: 'label'
+	        },
+	        hover: {
+	          mode: 'dataset'
+	        },
           zoom: {
             sensitivity: 0.5,
             enabled: true,
@@ -331,6 +361,12 @@ $('document')
             enabled: true,
             mode: 'x'
           },
+	        tooltips: {
+	          mode: 'label'
+	        },
+	        hover: {
+	          mode: 'dataset'
+	        },
           zoom: {
             sensitivity: 0.5,
             enabled: true,
@@ -384,6 +420,7 @@ $('document')
                   text: 'Bubble Sort - SORTED'
                 },
                 tooltips: {
+                  mode: 'label',
                   callbacks: {
                     title: (item, data) => `Size: ${item[0].xLabel}`
                   }
@@ -452,6 +489,7 @@ $('document')
                   text: 'Bubble Sort - REVERSED'
                 },
                 tooltips: {
+                  mode: 'label',
                   callbacks: {
                     title: (item, data) => `Size: ${item[0].xLabel}`
                   }
@@ -520,6 +558,7 @@ $('document')
                   text: 'Bubble Sort - RANDOM (Logarithmic scale)'
                 },
                 tooltips: {
+                  mode: 'label',
                   callbacks: {
                     title: (item, data) => `Size: ${item[0].xLabel}`
                   }
@@ -602,6 +641,7 @@ $('document')
                   text: 'Insertion Sort - SORTED'
                 },
                 tooltips: {
+                  mode: 'label',
                   callbacks: {
                     title: (item, data) => `Size: ${item[0].xLabel}`
                   }
@@ -670,6 +710,7 @@ $('document')
                   text: 'Insertion Sort - REVERSED'
                 },
                 tooltips: {
+                  mode: 'label',
                   callbacks: {
                     title: (item, data) => `Size: ${item[0].xLabel}`
                   }
@@ -738,6 +779,7 @@ $('document')
                   text: 'Insertion Sort - RANDOM (Logarithmic scale)'
                 },
                 tooltips: {
+                  mode: 'label',
                   callbacks: {
                     title: (item, data) => `Size: ${item[0].xLabel}`
                   }
@@ -820,6 +862,7 @@ $('document')
                   text: 'Binary Insertion Sort - SORTED'
                 },
                 tooltips: {
+                  mode: 'label',
                   callbacks: {
                     title: (item, data) => `Size: ${item[0].xLabel}`
                   }
@@ -888,6 +931,7 @@ $('document')
                   text: 'Binary Insertion Sort - REVERSED'
                 },
                 tooltips: {
+                  mode: 'label',
                   callbacks: {
                     title: (item, data) => `Size: ${item[0].xLabel}`
                   }
@@ -956,6 +1000,7 @@ $('document')
                   text: 'Binary Insertion Sort - RANDOM (Logarithmic scale)'
                 },
                 tooltips: {
+                  mode: 'label',
                   callbacks: {
                     title: (item, data) => `Size: ${item[0].xLabel}`
                   }
@@ -1038,6 +1083,7 @@ $('document')
                   text: 'Shell Sort (Shell Sequence) - SORTED'
                 },
                 tooltips: {
+                  mode: 'label',
                   callbacks: {
                     title: (item, data) => `Size: ${item[0].xLabel}`
                   }
@@ -1106,6 +1152,7 @@ $('document')
                   text: 'Shell Sort (Shell Sequence) - REVERSED'
                 },
                 tooltips: {
+                  mode: 'label',
                   callbacks: {
                     title: (item, data) => `Size: ${item[0].xLabel}`
                   }
@@ -1174,6 +1221,7 @@ $('document')
                   text: 'Shell Sort (Shell Sequence) - RANDOM (Logarithmic scale)'
                 },
                 tooltips: {
+                  mode: 'label',
                   callbacks: {
                     title: (item, data) => `Size: ${item[0].xLabel}`
                   }
@@ -1255,6 +1303,7 @@ $('document')
                   text: 'Shell Sort (Knuth Sequence) - SORTED'
                 },
                 tooltips: {
+                  mode: 'label',
                   callbacks: {
                     title: (item, data) => `Size: ${item[0].xLabel}`
                   }
@@ -1323,6 +1372,7 @@ $('document')
                   text: 'Shell Sort (Knuth Sequence) - REVERSED'
                 },
                 tooltips: {
+                  mode: 'label',
                   callbacks: {
                     title: (item, data) => `Size: ${item[0].xLabel}`
                   }
@@ -1391,6 +1441,7 @@ $('document')
                   text: 'Shell Sort (Knuth Sequence) - RANDOM (Logarithmic scale)'
                 },
                 tooltips: {
+                  mode: 'label',
                   callbacks: {
                     title: (item, data) => `Size: ${item[0].xLabel}`
                   }
@@ -1472,6 +1523,7 @@ $('document')
                   text: 'Shell Sort (Tokuda Sequence) - SORTED'
                 },
                 tooltips: {
+                  mode: 'label',
                   callbacks: {
                     title: (item, data) => `Size: ${item[0].xLabel}`
                   }
@@ -1540,6 +1592,7 @@ $('document')
                   text: 'Shell Sort (Tokuda Sequence) - REVERSED'
                 },
                 tooltips: {
+                  mode: 'label',
                   callbacks: {
                     title: (item, data) => `Size: ${item[0].xLabel}`
                   }
@@ -1608,6 +1661,7 @@ $('document')
                   text: 'Shell Sort (Tokuda Sequence) - RANDOM (Logarithmic scale)'
                 },
                 tooltips: {
+                  mode: 'label',
                   callbacks: {
                     title: (item, data) => `Size: ${item[0].xLabel}`
                   }
@@ -1719,6 +1773,12 @@ $('document')
               enabled: true,
               mode: 'xy'
             },
+            tooltips: {
+              mode: 'label'
+            },
+            hover: {
+              mode: 'dataset'
+            },
             zoom: {
               sensitivity: 0.5,
               enabled: true,
@@ -1811,11 +1871,17 @@ $('document')
           options: {
             title: {
               display: true,
-              text: "Reversed array times"
+              text: "Reversed array times (Logarithmic scale)"
             },
             pan: {
               enabled: true,
               mode: 'xy'
+            },
+            tooltips: {
+              mode: 'label'
+            },
+            hover: {
+              mode: 'dataset'
             },
             zoom: {
               sensitivity: 0.5,
@@ -1824,7 +1890,7 @@ $('document')
             },
             scales: {
               yAxes: [{
-                type: 'linear',
+                type: 'logarithmic',
                 position: 'left',
                 ticks: {
                   beginAtZero: true
@@ -1909,11 +1975,17 @@ $('document')
           options: {
             title: {
               display: true,
-              text: "Random array times"
+              text: "Random array times (Logarithmic scale)"
             },
             pan: {
               enabled: true,
               mode: 'xy'
+            },
+            tooltips: {
+              mode: 'label'
+            },
+            hover: {
+              mode: 'dataset'
             },
             zoom: {
               sensitivity: 0.5,
@@ -1922,7 +1994,7 @@ $('document')
             },
             scales: {
               yAxes: [{
-                type: 'linear',
+                type: 'logarithmic',
                 position: 'left',
                 ticks: {
                   beginAtZero: true
@@ -1992,7 +2064,7 @@ $('document')
             responsive: true,
             title: {
               display: true,
-              text: "Random array times ZOOMED  - Shell Algorithm"
+              text: "Random array times ZOOMED  - Shell Algorithm (Logarithmic scale)"
             },
             pan: {
               enabled: true,
@@ -2011,7 +2083,7 @@ $('document')
             },
             scales: {
               yAxes: [{
-                type: 'linear',
+                type: 'logarithmic',
                 position: 'left',
                 ticks: {
                   beginAtZero: true

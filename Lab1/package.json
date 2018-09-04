@@ -16,7 +16,7 @@
   "author": "RafaAudibert",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^5.4.0",
+    "eslint": "^5.5.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0"
   },
@@ -24,7 +24,7 @@
     "body-parser": "^1.18.3",
     "chalk": "^2.4.1",
     "chartist-plugin-tooltips": "0.0.17",
-    "chartjs-plugin-zoom": "^0.6.4",
+    "chartjs-plugin-zoom": "^0.6.5",
     "express": "^4.16.3",
     "express-namespace-routes": "0.0.3",
     "hirestime": "^3.2.1",
