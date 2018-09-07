@@ -10,7 +10,7 @@
 /**************/
 
 #define NUM_FILES 50
-#define INPUT_SIZE 20000
+#define INPUT_SIZE 100000
 #define MERGED_OUTPUT_SIZE NUM_FILES*INPUT_SIZE
 
 int totalCalls;
@@ -34,6 +34,8 @@ void runQuickSort(int* array, int size);
 int isArraySorted(int* array, int size);
 void mergeSortedArrays(int** input, int* output, int p, int N);
 void mergeWithSelectionTree(int** input, int* output, int p, int n);
+int popFromArray(int** input, int k);
+int topFromArray(int** input, int k);
 
 int head_of_file[NUM_FILES]; // usado para indicar onde esta o proximo dado nao-lido de cada array
 
@@ -140,9 +142,9 @@ void ex2()
     startTimer(&t);
 
     /* DESCOMENTE UM DOS METODOS ABAIXO PARA ORDENAR O ARRAY DE SAIDA */
-    runQuickSort(output,MERGED_OUTPUT_SIZE);
+//    runQuickSort(output,MERGED_OUTPUT_SIZE);
 //    mergeSortedArrays(input,output,NUM_FILES,MERGED_OUTPUT_SIZE);
-//    mergeWithSelectionTree(input,output,NUM_FILES,MERGED_OUTPUT_SIZE);
+    mergeWithSelectionTree(input,output,NUM_FILES,MERGED_OUTPUT_SIZE);
 
     time = stopTimer(&t);
     printf("Time %f\n",time);
@@ -336,33 +338,70 @@ int popFromArray(int** input, int k)
         return 10000000;
 }
 
-int popFromSelectionTree(int* tree, int** input, int p)
+void heapify(int* heap, int** input, int p, int i){
+ int e, d, menor;
+
+ while(i < p-1){
+   e = 2*i + 1;
+   d = 2*i + 2;
+   menor = heap[e] <= heap[d] ? e : d;
+   heap[i] = heap[menor];
+   i = menor;
+ }
+
+ heap[i] = popFromArray(input, i-p+1);
+
+ return;
+}
+
+int* buildHeap(int* heap, int** input, int p, int heapSize){
+
+  for(int i=heapSize-1; i>=0; i--) heapify(heap, input, p, i); //Heapify it, pulling stuff from the files
+
+  return heap;
+}
+
+int popFromSelectionTree(int* tree, int size, int** input, int p)
 {
-    int r;
+    int r = tree[0], i = 0, menor;
 
-    /*TODO: Implementar o metodo */
+    while(i < p-1){
+      menor = tree[2*i + 1] <= tree[2*i + 2] ? 2*i + 1 : 2*i + 2;
+      tree[i] = tree[menor];
+      i = menor;
+    }
 
+    tree[i] = popFromArray(input, i-p+1);
 
     return r;
 }
 
 void mergeWithSelectionTree(int** input, int* output, int p, int n)
 {
-    int size=2*p-1;
-    int* tree = (int*) malloc(size*sizeof(int));
+    int size=2*p-1, i;
+    int* tree = buildHeap((int*) malloc(size*sizeof(int)), input, p, size);
 
-    /*TODO: Implementar o metodo */
+    for(i=0; i<n;i++) output[i] = popFromSelectionTree(tree, size, input, p);
 
-
-
+    return;
 }
 
 void mergeSortedArrays(int** input, int* output, int p, int N)
 {
-    /*TODO: Implementar o metodo */
+    int i, k, menor, index=-1;
+    for(i=0; i<N; i++){
+      menor = topFromArray(input, 0);
+      index = 0;
+      for(k=1; k<p; k++){
+        if (topFromArray(input, k) < menor){
+          menor = topFromArray(input, k);
+          index = k;
+        }
+      }
+      output[i] = popFromArray(input, index);
+    }
 
-
-
+    return;
 }
 
 
