@@ -72,5 +72,6 @@ typings/
 # Serverless directories
 .serverless
 
-/files/*
-/sorted/*
+/Lab2/files/*
+/Lab2/sorted/*
+/Lab2/sortedBig/*

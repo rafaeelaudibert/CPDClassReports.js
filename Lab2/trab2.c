@@ -9,8 +9,8 @@
 /* CABECALHOS */
 /**************/
 
-#define NUM_FILES 50
-#define INPUT_SIZE 100000
+#define NUM_FILES 200
+#define INPUT_SIZE 1000000
 #define MERGED_OUTPUT_SIZE NUM_FILES*INPUT_SIZE
 
 int totalCalls;
@@ -28,6 +28,7 @@ float stopTimer(Timer* t);
 
 int* readFile(char* fileName);
 void writeFile(char* fileName, int* C, int size);
+void create_csv(char *filename, double a[][3], int qtdData)
 
 void runMergeSort(int* array, int size);
 void runQuickSort(int* array, int size);
@@ -38,6 +39,7 @@ int popFromArray(int** input, int k);
 int topFromArray(int** input, int k);
 
 int head_of_file[NUM_FILES]; // usado para indicar onde esta o proximo dado nao-lido de cada array
+void resetHeadOfFile();
 
 void calculaMedias();
 void calculaDesvioPadrao(int* arrayCalls, double* arrayTimer);
@@ -123,7 +125,7 @@ void ex2()
     {
 
         /* Le arquivo de entrada e coloca os dados no array 'input[i]' */
-        sprintf(fileName,"sorted/file%02d.txt",i);
+        sprintf(fileName,"sortedBig/file%02d.txt",i);
         printf("ENTRADA: %s\n",fileName);
         input[i] = readFile(fileName);
     }
@@ -150,9 +152,10 @@ void ex2()
     printf("Time %f\n",time);
 
     printf("ordenado? %s\n",(isArraySorted(output,MERGED_OUTPUT_SIZE)?"sim":"nao"));
+    printf("Qtd arquivos: %d\tQtd numeros p/arquivo: %d\t Array total: %d\n", NUM_FILES, INPUT_SIZE, MERGED_OUTPUT_SIZE);
 
     /* salva arquivo de saida */
-    sprintf(fileName,"sorted/output.txt");
+    sprintf(fileName,"sortedBig/output.txt");
     printf("SAIDA: %s\n",fileName);
     writeFile(fileName,output,MERGED_OUTPUT_SIZE);
 }
@@ -161,15 +164,13 @@ int main()
 {
     srand(time(NULL));
 
-    /* inicializa indicadores do inicio de cada array */
-    for(int k=0; k<NUM_FILES; k++)
-        head_of_file[k]=0;
+    resetHeadOfFile();
 
     /* Exercicio 1 */
-    //ex1();
+    ex1();
 
     /* Exercicio 2 */
-    ex2();
+    // ex2();
 
     return 0;
 }
@@ -198,6 +199,12 @@ void calculaDesvioPadrao(int* arrayCalls, double* arrayTimer)
     printf("Desvio padrao das chamadas: %.10lf\t\tDesvio padrao do timer: %.10lf\n", sqrt(acumuladoCalls / NUM_FILES), sqrt(acumuladoTimer / NUM_FILES));
 
     return;
+}
+
+void resetHeadOfFile(){
+  /* inicializa indicadores do inicio de cada array */
+  for(int k=0; k<NUM_FILES; k++)
+      head_of_file[k]=0;
 }
 
 
@@ -479,4 +486,30 @@ void writeFile(char* fileName, int* C, int size)
     }
 
     fclose(fp);
+}
+
+
+/*******************/
+/* SAVE IN CSV METHOD */
+/*******************/
+void create_csv(char *filename, double a[][3], int qtdData)
+{
+
+    FILE *fp;
+    int i,j;
+
+    printf("\n Creating %s file",filename);
+
+    fp=fopen(filename,"w+");
+    fprintf(fp,"Iteration, Array Size, Swaps, Time");
+
+    for(i=0; i<qtdData; i++)
+    {
+        fprintf(fp,"\n%d, %.0lf, %.0lf, %lf",i+1, a[i][0], a[i][1], a[i][2]);
+    }
+    fprintf(fp, "\n");
+
+    fclose(fp);
+
+    printf("\n %s file created\n",filename);
 }
