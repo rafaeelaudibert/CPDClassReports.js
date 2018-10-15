@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Lab 2</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+    <script src="chartjs-plugin-zoom.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+
+  </head>
+
+  <body>
+    <article>
+      <div class="title">
+        <div class="title-wrapper">
+          <h1 class="display-4"><span>Data Search & Classification </span></h1>
+        </div>
+        <div class="info">
+          <h3><small class="text-muted">Lab 2</small></h3>
+          <h3><small class="text-muted">INF - UFRGS</small></h3>
+        </div>
+      </div>
+      <p>This is the report/article for the second lab of the Data Search & Classification 📊 Subject of the UFRGS - INF CS course 💻. In this article we will talk about better sorting algorithms than the last ones, which will also have some charts
+        here talking about them. We will also have a playground in the end of the article, running with async JavaScript code, which will be emulated live on this page, through an API connected to the backend-server. You will be able to experiment
+        some
+        stuff (check it later).</p>
+      <blockquote>
+        <p>The JavaScript code will run in a separated thread, which will be requested through an API call to the Node.js backend of this server. The C data was generated with <a href="sort2.c">this</a> code and compiled with GCC version 5.1.0,
+          while
+          the data used can be found in this <a href="data2.zip">zip</a> file containing tons of csv files.</p>
+      </blockquote>
+      <figure>
+        <img src="http://getwallpapers.com/wallpaper/full/1/2/1/40579.jpg">
+      </figure>
+
+      <h2 id="subtitle-1">Introduction 🔃</h2>
+      <p>In the first lab, we analyzed some basic sorting algorithms: Bubble Sort, Insertion Sort and Shell Sort. In this one, we will analyze some better options with a \(\Theta(n\log(n))\) time complexity, which are Quick and Merge Sort. We will
+        also have some fun with a \(\Theta(n)\) algorithm called Radix Sort, which works only for numbers (it is pretty good, though). We will also have some special data structure demonstration to do something like a "merge" between files,
+        containing ordered data. It will take all the data on the \(n\) files, and make it ordered in a brand new file. We will make it following three different strategies: Quick Sort (same as in the first part), Merge Arrays (similar to the
+        MergeSort seen before) and using Selections Tree (which uses a kind of HeapSort).<br /><br />
+      </p>
+
+      <h2 id="subtitle-1">Analyzing sorting algorithms - Pt. 1 🔃</h2>
+      <p> Talking about the first part of the relatory, in the folder with all the data, you can find sorting tests with different quantity of files, which can be read as <i>&lt;sortingAlgorithm&gt;&lt;quantityOfFiles&gt;.csv</i>. The data below
+        will refer to the data when tested against 200 files, because it will make a better average time/recursion calls taken to go through the algorithm, as well as a better time/recursion calls standard deviation.<br /><br /> </p>
+
+
+      <h3>Quick Sort 🔁</h3>
+      <p>QuickSort is probably the most known and used sorting algorithm. It is used (with some variations) in most of the built-in sort algorithms of programming languages. It has a worst case time complexity of \(\Theta(n^2)\), but it occurs
+        so
+        rarely (if implemented in the right manner), that its average case time complexity is the so long searched \(\Theta(n\log(n))\)</p>
+      <p>It was used arrays varying from \(2^1\) until \(2^{19}\) (random generated numbers) to generate the data below, as we couldn't use larger arrays cause of recursion depth limit. The left y-axis shows the total recursive calls and the
+        right one shows the time. As a reminder, the sorted charts may be a bit wrong in the time dataset, as explained in the latter relatory (tldr: OS interruptions can cause this).</p>
+      <p>The code used for it can be seen below, followed by the chart showing the data (in the test with the 200 files, as said before).</p>
+
+      <!-- QuickSort code -->
+      <div class="medium">
+        <img src="img/quick.png">
+      </div>
+      <div class='canvas-inside'>
+        <canvas id="quick-1" class="chartjs" width="640" height="400"></canvas>
+      </div>
+      <p> We also have more data about it, which you can find in the csv files, linked above. Quick sort has a standard deviation of 0.01s when talking about time taken to make it, as well as a standard deviation of roughly 300 recursive
+        calls, which is not that much, actually. If we compare Quick Sort, with the algorithms seen in the other report, we can see a HUGE difference (you can see that difference in the Playground below).<br /><br />
+      </p>
+
+
+      <h3>Merge Sort ⤵️</h3>
+      <p>Let's move on to another sorting algorithm which almost everybody knows. It also has an average time complexity of \(\Theta(n\log(n))\), having it as its worst case time complexity as well.</p>
+      <p>The code used for it can be seen below, followed by the chart showing the data.</p>
+
+      <!-- MergeSort code -->
+      <div class="medium">
+        <img src="img/merge.png">
+      </div>
+      <div class='canvas-inside'>
+        <canvas id="merge-1" class="chartjs" width="640" height="400"></canvas>
+      </div>
+      <p>
+        What is really nice about MergeSort is that it makes the exactly same amount of recursive calls every time, doesn't matter how the array is ordered, so we have 0 as its standard deviation for recursive calls, and an average
+        standard deviation of 0.01s, similar to QuickSort. That happens because
+        it ALWAYS split the array exactly in the middle, what didn't happen with Quick Sort, which could make the recursion tree pretty unbalanced. Below you will be able to see that Merge Sort is actually a bit slower than QuickSort,
+        and that's
+        why we don't see it implemented as the standard sorting algorithm in a lot of programming languages. A factor that causes it to take more time, is that it has a lot more recursive calls comparing to QuickSort (1048575 vs 702256,
+        when tested against 524288 numbers). Something really nice, is that we can see how MergeSort creates a perfect tree looking to the recursive calls number. It will always represent \(n * 2 - 1\), with \(n = \)<i> quantity of numbers
+          to be sorted.</i>
+        <br /><br />
+      </p>
+
+
+      <h3>Radix Sort 🔁</h3>
+      <p>RadixSort should be, in theory, an incredibly fast algorithm to sort numbers. It has a \(\Theta(n)\) time complexity, and doesn't make a single comparison to sort the numbers, although it uses some auxiliar memory.</p>
+      <p>Its basic idea is that it uses 10 stacks, to put each number in a different one according to a specific digit of it (that's why it only works for specific kinds of data, like integers and strings). If you order the numbers
+        going from the least significant digit to the most significant one, using a stack to maintain its stabilty, you have a really fast algorithm, which can be seen below, as well as a chart to see some information about it:</p>
+
+      <!-- RadixSort code -->
+      <div class="medium">
+        <img src="img/radix.png">
+      </div>
+      <div class='canvas-inside'>
+        <canvas id="radix-1" class="chartjs" width="640" height="400"></canvas>
+      </div>
+      <p><br /> It's kinda interesting, because RadixSort doesn't look THAT fast if we compare with the others which we tried before (we have a chart below). It is really nice, because it actually has no recursion, being purely iterative, and
+        doesn't make a single comparison, just a huge numerical manipulation, which is really impressive. That algorithm is the LSD Radix Sort, because we order according to the least significant digit before. If we would sort it with a MSD
+        RadixSort, we would need to change our code, and add some comparisons, because just ordering from the most to least significant digit, wouldn't sort the numbers accordingly. RadixSort has a 0.02 seconds standard deviation, which is pretty
+        low, similar to the others (standard deviation of recursive calls is 0, as it doesn't make any recursion or comparison).
+        <br /><br />
+      </p>
+
+      <h3>Pt. 1 - CONCLUSION</h3>
+      <p>Here we will put all the last 3 algorithms together, to see a comparison between the time they take to sort the different arrays sizes. It will also be used the dataset refering to the 200 files input, as it has a better
+        probabilistic chance of representing the real average time for their execution.</p>
+      <div class='canvas-inside'>
+        <canvas id="timeComparsion-1" class="chartjs" width="640" height="400"></canvas>
+      </div>
+      <p><br /> As said before, it is weird that RadixSort is slower than the others, which I assume is something related to the function who takes the digit from the number, as it has some potentiation and modulo arithmetic, which take a lot of
+        computation. Something crazy we can see when testing with the Playground below, is that Javascript is roughly 600 times slower than C to make a QuickSort sorting.
+        <br /><br />
+      </p>
+
+      <h2 id="subtitle-1">Analyzing sorting algorithms - Pt. 2 🔃</h2>
+      <p> This second part was divided trying three different "data structures". </p>
+      <p>We have \(n\) different files with numbered data inside of it. The point is that each file has its data ordered, and our mission is to create a huge new file containing all the data in those files, ordered as well.</p>
+      <p>In this part, we have a problem. As our final array can be HUGE according to the size of the input arrays, and the quantity of input files which will be merged, some types of data strucutres only have data until
+        \(2^{14}\)
+        for some quantity of files, while the most of it will have data until \(2^{19}\)</p>
+      <p>The first one, which will be refered as "Files Quick Sort", is a kind of apllication of Quick Sort Algorithm. It is the one with problems with huge arrays, because it will reach maximum recursion depth really fast. It
+        will
+        be the slower of the three structures, as the fact of the data inside of the files being already ordered doesn't make any difference, because it will try to sort it anyways.</p>
+      <p>The second one will be called "Merge Arrays", and is somewhat similar to a Merge Sort algorithm, but taking in consideration that we already separated and merge most of the arrays, making the algorithm just the merge
+        part
+        of
+        the MergeSort full algorithm, or, if you prefer, just the part where you are "coming back" from the recursion.</p>
+      <p>The third implementation, called Selection Tree, uses a Minimum Heap to sort all the data in the files. A heap is a special type of data tree stored in an array. We will have the top of our files in the "leaves" of the
+        heap,
+        and the smallest number in all the files in the root of the tree. Each step, we remove the smallest one, inserting it in the final sorted array, and moving the smallest number back to the root of the heap.</p>
+      <p> All the implementations can be seen in the codes below (QuickSort will be omitted, as it has already been shown before), as well as a chart comparing the three different structures.</p>
+
+      <!-- Codes -->
+      <div class="medium">
+        <img src="img/mergeSortedArrays.png">
+      </div>
+      <div class="medium">
+        <img src="img/selectionTree.png">
+      </div>
+      <div class='canvas-inside'>
+        <canvas id="dataStructures-1" class="chartjs" width="640" height="400"></canvas>
+      </div>
+      <p><br /> It's interesting, because QuickSort gets the prize for faster, although I wasn't waiting for it, as the others are REALLY fast. The problem is that, as we go to bigger array sizes, Quick Sort just COMPLETELY crashes (in the chart
+        above, it couldn't sort 6.5 million numbers). This happens, because as we are testing with 200 files, our final array size will be kinda big, so the recursion will be HUGE to handle all this sorting. Maybe I implemented something wrong, but
+        I don't think that is the case, because it starts to crash just when testing agains TONS of files, with huge array sizes in it. Another interesting thing is that the merging technique has almost the same average time taken as the heap
+        sort/selection tree one, and god, they are REALLY fast, because as you can see they take smth around 0.62s to sort incredible 104 MILLION numbers (okay, the numbers are partially ordered and the algorithms abuse of this, but it is something
+        really awesome anyway).
+        <br /><br />
+      </p>
+
+
+      <h3>Playground ⏳</h3>
+      <p>This algorithms were also "translated" to JavaScript which can be acessed through the API below. You can test the algorithms which were in the other report, as well as the three described in the first part of
+        this
+        report. As the last time, it doesn't cost to remember: I wish this was non-blocking requests, so that you could make more than one request and receive all of them as soon as they finish ther computation,
+        but I couldn't, so be careful with some big numbers, as it will execute all the queries in order, until you restart the server. Make some exploration and discover what you can do with it. You can see that
+        running
+        it
+        in assyncronous Javascript
+        makes it REALLY faster when using Bubble or Insertion sort, although it makes Shell algorithm slower (we can't process a lot of things at the same time, as we must make all the different sequence values of \(h\)
+        in
+        strict order).Hope you enjoyed,
+        and see you next time!</p>
+      <div class="card">
+        <div class="card-body">
+          <form>
+            <div class="form-group">
+              <label for="sortingAlgorithm">Sorting Algorithm</label>
+              <select class="form-control" id="sortingAlgorithm">
+                <option value='bubble'>Bubble Sort</option>
+                <option value='insertion'>Insertion Sort</option>
+                <option value='binaryInsertion'>Binary Insertion Sort</option>
+                <option value='shell/0'>Shell Sort - Shell Sequence</option>
+                <option value='shell/1'>Shell Sort - Knuth Sequence</option>
+                <option value='shell/2'>Shell Sort - Tokuda Sequence</option>
+                <option value='quick'>Quick Sort</option>
+                <option value='merge'>Merge Sort</option>
+                <option value='radix'>Radix Sort</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="arrayType">Array Type</label>
+              <select class="form-control" id="arrayType">
+                <option value='sorted'>Sorted Array</option>
+                <option value='reversed'>Reversed Array</option>
+                <option value='random'>Random Array</option>
+                <option value='custom' selected="selected">Custom Array</option>
+              </select>
+            </div>
+            <div id="arraySizeDiv" class="form-group" style="display: none">
+              <label for="arraySize">Array Size</label>
+              <input type="text" class="form-control" id="arraySize">
+              <small id="arraySizeHelp" class="form-text text-muted">Insert a valid positive number</small>
+            </div>
+            <div id="customFieldDiv" class="form-group">
+              <label id="labelCustomField" for="customField">Custom field</label>
+              <input type="text" class="form-control" id="customField" placeholder="1 2 3 4">
+              <small id="customFieldHelp" class="form-text text-muted">Insert numbers with a space between them</small>
+            </div>
+            <button id="submitButton" type="submit" class="btn btn-primary">Go</button>
+          </form>
+          <hr />
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Sorting Algorithm</th>
+                  <th scope="col">Array Type</th>
+                  <th scope="col">Array Size</th>
+                  <th scope="col">Time</th>
+                  <th scope="col">Changes</th>
+                </tr>
+              </thead>
+              <tbody id="playgroundTable">
+                <tr id="information">
+                  <td></td>
+                  <td colspan="5">Nothing here yet, you should make requests there, so that I can show u smth ⬆️</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <button id="resetTable" class="btn btn-primary float-right">Reset Table</button>
+        </div>
+      </div>
+
+      <div class="space-between">
+        <button type="button" onclick="location.href = '/lab1'" class="btn btn-warning">⬅️ Lab 1</button>
+        <button type="button" onclick="location.href = '/lab4'" class="btn btn-warning">Lab 4 ➡️</button>
+      </div>
+
+    </article>
+    <footer><a href="www.inf.ufrgs.br/~rbaudibert">Website</a> | <a href="https://github.com/rafaeelaudibert">GitHub</a> | <a href="https://www.facebook.com/rafaeelaudibert">Facebook</a>
+    </footer>
+
+
+    <script src="lab2.js"></script>
+    <script>
+      const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1);
+
+      $('#submitButton').click(e => {
+        e.preventDefault();
+
+        const sortingAlgorithm = $('#sortingAlgorithm')[0].value;
+        const arrayType = $('#arrayType')[0].value;
+        const arraySize = parseInt($('#arraySize')[0].value);
+        const customValue = $('#customField')[0].value.split(' ').map(parseFloat);
+
+        if (arrayType == 'custom' && !isNaN(customValue[0])) {
+          $.ajax(`${arrayType}/${sortingAlgorithm}/${customValue}`).then(data => {
+            $('#information').hide(0);
+            const table = $('#playgroundTable');
+            const {
+              changes,
+              ordered,
+              time
+            } = data;
+            table.append($('<tr></tr>').append($('<td></td>').append(table[0].children.length)).append($('<td></td>').append(capitalize(sortingAlgorithm))).append($('<td></td>').append(capitalize(arrayType))).append($('<td></td>')
+              .append(
+                customValue.length)).append($(
+              '<td></td>').append(time)).append($(
+              '<td></td>').append(
+              changes)));
+          });
+
+        } else if (arrayType != 'custom' && !isNaN(arraySize)) {
+          $.ajax(`${arrayType}/${sortingAlgorithm}/${arraySize}`).then(data => {
+            $('#information').hide(0);
+            const table = $('#playgroundTable');
+            const {
+              changes,
+              ordered,
+              time
+            } = data;
+            table.append($('<tr></tr>').append($('<td></td>').append(table[0].children.length)).append($('<td></td>').append(capitalize(sortingAlgorithm))).append($('<td></td>').append(capitalize(arrayType))).append($('<td></td>')
+              .append(
+                arraySize)).append($(
+              '<td></td>').append(time)).append($(
+              '<td></td>').append(
+              changes)));
+          });
+        } else {
+          $('#information').hide(0);
+          const table = $('#playgroundTable');
+          table.append($('<tr></tr>').append($('<td></td>').append(table[0].children.length)).append($('<td></td>').append(capitalize(sortingAlgorithm))).append($('<td></td>').append(capitalize(arrayType))).append($('<td></td>').append(
+            'MÁ REQUISIÇÃO')).append($(
+            '<td></td>').append('-')).append($(
+            '<td></td>').append(
+            '-')));
+        }
+      })
+
+      $('#arrayType').change(e => {
+        if (e.target.value == 'custom') {
+          $('#customFieldDiv').show(0)
+          $('#arraySizeDiv').hide(0)
+        } else {
+          $('#customFieldDiv').hide(0)
+          $('#arraySizeDiv').show(0)
+        }
+      });
+
+      $('#resetTable').click(e => {
+        const table = $('#playgroundTable');
+        const length = table[0].children.length
+        $('#information').show(0);
+        for (let i = 1; i < length; i++)
+          table[0].deleteRow(1);
+      })
+
+    </script>
+  </body>
+
+</html>
