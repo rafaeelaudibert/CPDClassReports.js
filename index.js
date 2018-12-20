@@ -347,6 +347,7 @@ app.use(express.static('Lab2+3'));
 app.use(express.static('Lab4'));
 app.use(express.static('Lab1/csv'));
 app.use(express.static('Lab2+3/csv'));
+app.use(express.static('.'));
 
 app.use(bodyParser.json());
 app.use(async (req, res, next) => {

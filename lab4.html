@@ -147,36 +147,57 @@
 
 
   <script src="lab4.js"></script>
+  <script src="hash.js"></script>
   <script>
+    let hashTable;
+
+    function newHash() {
+      hashTable = new HashTable(1009, 'openDoubleHashing');
+      return hashTable;
+    }
+
+    function setInfo(key, data) {
+      if (!hashTable) createHash();
+      let {
+        conflicts,
+        exist
+      } = hashTable.insert(key, data);
+      return {
+        key,
+        data,
+        conflicts,
+        exist
+      }
+    }
+
+    function getInfo(key) {
+      return hashTable.search(key)
+    }
+
     $('#insertButton').click(e => {
       e.preventDefault();
+      $('#information').hide();
 
-      const keys = $('#key')[0].value.split('\n');
-      const datas = $('#data')[0].value.split('\n');
+      const keys = $('#key')[0].value.split('\n').filter(x => x != '');
+      const datas = $('#data')[0].value.split('\n').filter(x => x != '');
 
       if (keys[0] && datas[0] && keys.length == datas.length) {
         for (let key in keys) {
-          $.post(`hash/${keys[key]}/${datas[key]}`).then(back => {
-            $('#information').hide();
-            const table = $('#playgroundTable');
-            const {
-              key,
-              data,
-              conflicts,
-              exist
-            } = back;
-            table.append($('<tr></tr>').append($('<td></td>').append(table[0].children.length)).append($(
-              '<td></td>').append('Insertion')).append($('<td></td>').append(key)).append($('<td></td>')
-              .append(
-                data)).append($(
-              '<td></td>').append(exist ? 'Key already exists' : conflicts)));
-            $('#key')[0].value = '';
-            $('#data')[0].value = '';
-          });
+          const table = $('#playgroundTable');
+          const {
+            data,
+            conflicts,
+            exist
+          } = setInfo(keys[key], datas[key]);
+          table.append($('<tr></tr>').append($('<td></td>').append(table[0].children.length)).append($(
+            '<td></td>').append('Insertion')).append($('<td></td>').append(keys[key])).append($('<td></td>')
+            .append(
+              data)).append($(
+            '<td></td>').append(exist ? 'Key already exists' : conflicts)));
+          $('#key')[0].value = '';
+          $('#data')[0].value = '';
         }
-
       } else {
-        $('#information').hide();
         const table = $('#playgroundTable');
         table.append($('<tr></tr>').append($('<td></td>').append(table[0].children.length)).append($('<td></td>').append(
           'BAD REQUEST -> FILL THE VALUES')));
@@ -186,30 +207,28 @@
     $('#retrieveButton').click(e => {
       e.preventDefault();
 
+      $('#information').hide();
       const keys = $('#key')[0].value.split('\n');
 
       if (keys[0]) {
         for (let key of keys) {
-          $.ajax(`hash/${key}`).then(back => {
-            $('#information').hide();
-            const table = $('#playgroundTable');
-            const {
-              found,
-              elem,
-              conflicts
-            } = back;
-            table.append($('<tr></tr>').append($('<td></td>').append(table[0].children.length)).append($(
-              '<td></td>').append('Search')).append($('<td></td>').append(key)).append($('<td></td>')
-              .append(
-                found ? elem.data : 'Not found')).append($(
-              '<td></td>').append(conflicts)));
-            $('#key')[0].value = '';
-            $('#data')[0].value = '';
-          });
+          const {
+            found,
+            elem,
+            conflicts
+          } = getInfo(key);
+          const table = $('#playgroundTable');
+
+          table.append($('<tr></tr>').append($('<td></td>').append(table[0].children.length)).append($(
+            '<td></td>').append('Search')).append($('<td></td>').append(key)).append($('<td></td>')
+            .append(
+              found ? elem.data : 'Not found')).append($(
+            '<td></td>').append(conflicts)));
+          $('#key')[0].value = '';
+          $('#data')[0].value = '';
         }
 
       } else {
-        $('#information').hide();
         const table = $('#playgroundTable');
         table.append($('<tr></tr>').append($('<td></td>').append(table[0].children.length)).append($('<td></td>').append(
           'BAD REQUEST -> FILL THE VALUES')));
@@ -218,12 +237,9 @@
 
     $('#resetButton').click(e => {
       e.preventDefault();
-
-      $.post(`hash`).then(back => {
-        console.log('Hash nova');
-        $('#clearTable').click();
-      });
-
+      newHash();
+      console.log('Hash nova');
+      $('#clearTable').click();
     })
 
     $('#clearTable').click(e => {

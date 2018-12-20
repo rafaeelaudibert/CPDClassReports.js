@@ -8,7 +8,7 @@ class Element {
 	}
 }
 
-module.exports = class HashTable {
+class HashTable {
 	constructor(hashSize, hashAddressing) {
 		this.tableSize = hashSize;
 		this.table = new Array(hashSize);
