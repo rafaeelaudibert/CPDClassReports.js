@@ -298,47 +298,6 @@ routes.prefix('/custom', async custom => {
 	});
 });
 
-let hashTable;
-routes.prefix('/hash', async hash => {
-	hash.post('/', async (req, res) => {
-		try {
-			console.log(`POST/ > Hash - NEW`)
-			hashTable = new Hash(1009, 'openDoubleHashing');
-			res.json(hashTable)
-		} catch (e) {
-			console.error(e);
-		}
-	});
-
-	hash.post('/:key/:data', async (req, res) => {
-		try {
-			console.log(`POST/ > Hash - Adding info`);
-			if (!hashTable) hashTable = new Hash(1009, 'openDoubleHashing');
-			let {
-				conflicts,
-				exist
-			} = hashTable.insert(req.params.key, req.params.data);
-			res.json({
-				key: req.params.key,
-				data: req.params.data,
-				conflicts: conflicts,
-				exist: exist
-			})
-		} catch (e) {
-			console.error(e);
-		}
-	});
-
-	hash.get('/:key', async (req, res) => {
-		try {
-			console.log(`GET/ > Hash - Retrieve info from key ${req.params.key}`)
-			res.json(hashTable.search(req.params.key))
-		} catch (e) {
-			console.error(e);
-		}
-	});
-});
-
 app.use(routes);
 app.use(express.static('assets'));
 app.use(express.static('node_modules/chartjs-plugin-zoom'));
