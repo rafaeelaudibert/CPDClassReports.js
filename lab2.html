@@ -323,6 +323,8 @@
   <script src="lab2.js"></script>
   <script>
     const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1);
+    const apiPath = 'https://m9qx1gsg88.execute-api.sa-east-1.amazonaws.com/prod';
+    jQuery.support.cors = true;
 
     $('#submitButton').click(e => {
       e.preventDefault();
@@ -337,12 +339,24 @@
         $('#information').hide(0);
         const table = $('#playgroundTable');
         const parsedData = JSON.parse(data);
-        const {
-          changes,
-          ordered,
-          time
-        } = parsedData.response;
-        appendData(table, sortingAlgorithm, arrayType, (shellSort ? customValue.length : arraySize), time, changes);
+        if (parsedData.errorMessage) {
+          table.append($('<tr></tr>').append($('<td></td>').append(table[0].children.length)).append($('<td></td>')
+            .append(
+              capitalize(sortingAlgorithm))).append($('<td></td>').append(capitalize(arrayType))).append($(
+            '<td></td>').append(
+            'TIME LIMIT EXCEEDED (3s)')).append($(
+            '<td></td>').append('-')).append($(
+            '<td></td>').append(
+            '-')));
+        } else {
+          const {
+            changes,
+            ordered,
+            time
+          } = parsedData.response;
+          appendData(table, (shellSort ? sortingAlgorithm.split('/')[0] : sortingAlgorithm), arrayType, (shellSort ?
+            customValue.length : arraySize), time, changes);
+        }
       }
 
       function appendData(table, sortingAlgorithm, arrayType, arraySize, time, changes) {
@@ -373,7 +387,7 @@
         table.append($('<tr></tr>').append($('<td></td>').append(table[0].children.length)).append($('<td></td>').append(
           capitalize(sortingAlgorithm))).append($('<td></td>').append(capitalize(arrayType))).append($(
           '<td></td>').append(
-          'MÁ REQUISIÇÃO')).append($(
+          'BAD REQUISITION')).append($(
           '<td></td>').append('-')).append($(
           '<td></td>').append(
           '-')));
