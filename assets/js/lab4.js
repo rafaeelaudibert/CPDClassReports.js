@@ -31,7 +31,7 @@ $(document)
 	.ready(() => {
 		$.ajax({
 			type: "GET",
-			url: "hash.csv",
+			url: "Lab4/hash.csv",
 			dataType: "text",
 			success: data => {
 				const {
