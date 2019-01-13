@@ -1,4 +1,4 @@
-# *CLASSIFICAÇÃO E PESQUISA DE DADOS - INF @ UFRGS**
+# *CLASSIFICAÇÃO E PESQUISA DE DADOS - INF @ UFRGS*
 
 Esse repositório contém relatórios referentes à Classificação e Pesquisa de Dados, desenvolvidos no INF/UFRGS.
 
@@ -18,4 +18,4 @@ Nas próximas vezes, o único comando necessário é `npm start`, e após isso v
 Você poderá escolher todos os relatórios para ver diretamente na página inicial.
 
 ## Autor
-* **Rafael Baldasso Audibert** - 00287695.
+* **Rafael Baldasso Audibert** - Cartão UFRGS: 00287695.
