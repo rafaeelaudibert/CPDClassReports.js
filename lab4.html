@@ -1,212 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8">
-    <title>Lab 4</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
-    <script src="chartjs-plugin-zoom.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-    <link rel="stylesheet" href="main.css">
+<head>
+  <meta charset="UTF-8">
+  <title>Lab 4</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+  <script src="assets/js/chartjs-plugin-zoom.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css">
 
-  </head>
+</head>
 
-  <body>
-    <article>
-      <div class="title">
-        <div class="title-wrapper">
-          <h1 class="display-4"><span>Data Search & Classification </span></h1>
-        </div>
-        <div class="info">
-          <h3><small class="text-muted">Lab 4</small></h3>
-          <h3><small class="text-muted">INF - UFRGS</small></h3>
-        </div>
+<body>
+  <article>
+    <div class="title">
+      <div class="title-wrapper">
+        <h1 class="display-4"><span>Data Search & Classification </span></h1>
       </div>
-      <p>This is the report/article for the fourth lab of the Data Search & Classification 📊 Subject of the UFRGS - INF CS course 💻. In this article we will talk about hashing algorithms, which allow us to retrieve some data with an alphanumeric
-        key, instead of numeric key, like we would do with an array. You will be able to experiment it in the bottom of the page, adding information to the hash, and seeing if it is available or not with an incredible \(\Theta(1)\) time complexity.</p>
-      <blockquote>
-        <p>The JavaScript code will run in a separated thread, which will be requested through an API call to the Node.js backend of this server.
-      </blockquote>
-      <figure>
-        <img src="http://on-desktop.com/images/wp.php?path=/wps/Backgrounds_Code_in_Java__background_098922_.jpg&wp=17">
-      </figure>
-
-      <h2 id="subtitle-1">Introduction 🔃</h2>
-      <p>Hash is an incredible tool to acess information through an alphanumeric key (can be extended to more types of keys, but only alphanumerics one will be covered in this report). It is natively implemented in most of the high level languages
-        (dictionaries in Python, objects in JavaScript) and even some implementation in kinda low-level languages (such as the map data structure in C++). Which is pretty awesome is that it has an \(\Theta(1)\) time complexity, which means that no
-        matter how many data are in the Hash Table, we can acess any value with a constant time.<br /><br />
-      </p>
-
-      <h2 id="subtitle-1">Hashing functions 🔃</h2>
-      <p>In the texts/codes below, when we talk about hashing functions we are talking about the function which we pass a string and it returns us a key which will be used to acess the hash table. For this code, we used 2 differents hashing
-        functions, as can be seen in the code below. The first one is the primary one, while the second one is used with the rehashing algorithm, which will be explained below.</p>
-      <div class="medium">
-        <img src="img/hash1.png">
-        <br /><br />
-        <img src="img/hash2.png">
+      <div class="info">
+        <h3><small class="text-muted">Lab 4</small></h3>
+        <h3><small class="text-muted">INF - UFRGS</small></h3>
       </div>
+    </div>
+    <p>This is the report/article for the fourth lab of the Data Search & Classification 📊 Subject of the UFRGS - INF
+      CS course 💻. In this article we will talk about hashing algorithms, which allow us to retrieve some data with an
+      alphanumeric
+      key, instead of numeric key, like we would do with an array. You will be able to experiment it in the bottom of
+      the page, adding information to the hash, and seeing if it is available or not with an incredible \(\Theta(1)\)
+      time complexity.</p>
+    <blockquote>
+      <p>The JavaScript code will run in a separated thread, which will be requested through an API call to the Node.js
+        backend of this server.
+    </blockquote>
+    <figure>
+      <img src="http://on-desktop.com/images/wp.php?path=/wps/Backgrounds_Code_in_Java__background_098922_.jpg&wp=17">
+    </figure>
+
+    <h2 id="subtitle-1">Introduction 🔃</h2>
+    <p>Hash is an incredible tool to acess information through an alphanumeric key (can be extended to more types of
+      keys, but only alphanumerics one will be covered in this report). It is natively implemented in most of the high
+      level languages
+      (dictionaries in Python, objects in JavaScript) and even some implementation in kinda low-level languages (such
+      as the map data structure in C++). Which is pretty awesome is that it has an \(\Theta(1)\) time complexity, which
+      means that no
+      matter how many data are in the Hash Table, we can acess any value with a constant time.<br /><br />
+    </p>
+
+    <h2 id="subtitle-1">Hashing functions 🔃</h2>
+    <p>In the texts/codes below, when we talk about hashing functions we are talking about the function which we pass a
+      string and it returns us a key which will be used to acess the hash table. For this code, we used 2 differents
+      hashing
+      functions, as can be seen in the code below. The first one is the primary one, while the second one is used with
+      the rehashing algorithm, which will be explained below.</p>
+    <div class="medium">
+      <img src="assets/img/hash1.png">
+      <br /><br />
+      <img src="assets/img/hash2.png">
+    </div>
 
 
-      <h2 id="subtitle-1">Analyzing hashing algorithms 🔃</h2>
-      <p> Three types of hashing algorithms will be used, divided in two categories: Open and Closed Hashing. Talking about Open Hashing we will have the Linear Search algorithm, which tries to verify the next position of the Hash Table, if the
-        actual is already filled, and the Rehashing Algorithm, which has an increment calculated through another hashing function, trying to minimize the conflicts. The closed hashing algorithm used is the Listing Algorithm, which creates a list in
-        each of the possible hashed key values instead of trying to find another place to insert it. In the chart below we can see the comparison between the three. They were tested against <a href="dataset.txt">this</a> names database when
-        inserting, and <a href="queries.txt">this</a> names when searching, varying the
-        table size,
-        and the data shown is the quantity of colision in the insertion.<br /><br /> </p>
-      <div class='canvas-inside'>
-        <canvas id="hash-1" class="chartjs" width="640" height="400"></canvas>
-      </div>
+    <h2 id="subtitle-1">Analyzing hashing algorithms 🔃</h2>
+    <p> Three types of hashing algorithms will be used, divided in two categories: Open and Closed Hashing. Talking
+      about Open Hashing we will have the Linear Search algorithm, which tries to verify the next position of the Hash
+      Table, if the
+      actual is already filled, and the Rehashing Algorithm, which has an increment calculated through another hashing
+      function, trying to minimize the conflicts. The closed hashing algorithm used is the Listing Algorithm, which
+      creates a list in
+      each of the possible hashed key values instead of trying to find another place to insert it. In the chart below
+      we can see the comparison between the three. They were tested against <a href="dataset.txt">this</a> names
+      database when
+      inserting, and <a href="queries.txt">this</a> names when searching, varying the
+      table size,
+      and the data shown is the quantity of colision in the insertion.<br /><br /> </p>
+    <div class='canvas-inside'>
+      <canvas id="hash-1" class="chartjs" width="640" height="400"></canvas>
+    </div>
 
 
-      <h3><br />Playground ⏳</h3>
-      <p>This time we only made JavaScript code, as it would be kinda hard to deal with strings in C. You can test the rehashing algorithm below. Make some exploration and discover what you can do with it. By default, the table has roughly 1000
-        spaces, so don't insert too much 'cause it may crash and stop working until you restart the server as it doesn't resizes the hash table. Hope you enjoyed it again,
-        and see you next time!</p>
-      <div class="card">
-        <div class="card-body">
-          <h3> Hash Table<br /></h3>
-          <form>
-            <div class="form-group">
-              <label for="key">Key(s)</label>
-              <textarea type="text" class="form-control" rows="5" id="key"></textarea>
-              <small id="keyHelp" class="form-text text-muted">Insert alphanumeric key values in each line</small>
-            </div>
-            <div class="form-group">
-              <label for="data">Value(s)</label>
-              <textarea type="text" class="form-control" rows="5" id="data"></textarea>
-              <small id="dataHelp" class="form-text text-muted">Insert alphanumeric data values in each line</small>
-            </div>
-            <button id="insertButton" type="submit" class="btn btn-primary left">Insert Key(s)/Value(s)</button>
-            <button id="retrieveButton" type="submit" class="btn btn-primary left">Retrieve Value(s)</button>
-            <button id="resetButton" type="submit" class="btn btn-primary right">Reset HashTable</button>
-          </form>
-          <hr />
-          <div class="table-responsive">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Insertion or Search?</th>
-                  <th scope="col">Key</th>
-                  <th scope="col">Data</th>
-                  <th scope="col">Conflicts</th>
-                </tr>
-              </thead>
-              <tbody id="playgroundTable">
-                <tr id="information">
-                  <td></td>
-                  <td colspan="5">Nothing here yet, you should make requests there, so that I can show u smth ⬆️</td>
-                </tr>
-              </tbody>
-            </table>
+    <h3><br />Playground ⏳</h3>
+    <p>This time we only made JavaScript code, as it would be kinda hard to deal with strings in C. You can test the
+      rehashing algorithm below. Make some exploration and discover what you can do with it. By default, the table has
+      roughly 1000
+      spaces, so don't insert too much 'cause it may crash and stop working until you restart the server as it doesn't
+      resizes the hash table. Hope you enjoyed it again,
+      and see you next time!</p>
+    <div class="card">
+      <div class="card-body">
+        <h3> Hash Table<br /></h3>
+        <form>
+          <div class="form-group">
+            <label for="key">Key(s)</label>
+            <textarea type="text" class="form-control" rows="5" id="key"></textarea>
+            <small id="keyHelp" class="form-text text-muted">Insert alphanumeric key values in each line</small>
           </div>
-          <button id="clearTable" class="btn btn-primary float-right">Clear Table</button>
+          <div class="form-group">
+            <label for="data">Value(s)</label>
+            <textarea type="text" class="form-control" rows="5" id="data"></textarea>
+            <small id="dataHelp" class="form-text text-muted">Insert alphanumeric data values in each line</small>
+          </div>
+          <button id="insertButton" type="submit" class="btn btn-primary left">Insert Key(s)/Value(s)</button>
+          <button id="retrieveButton" type="submit" class="btn btn-primary left">Retrieve Value(s)</button>
+          <button id="resetButton" type="submit" class="btn btn-primary right">Reset HashTable</button>
+        </form>
+        <hr />
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Insertion or Search?</th>
+                <th scope="col">Key</th>
+                <th scope="col">Data</th>
+                <th scope="col">Conflicts</th>
+              </tr>
+            </thead>
+            <tbody id="playgroundTable">
+              <tr id="information">
+                <td></td>
+                <td colspan="5">Nothing here yet, you should make requests there, so that I can show u smth ⬆️</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+        <button id="clearTable" class="btn btn-primary float-right">Clear Table</button>
       </div>
+    </div>
 
-      <div class="space-between">
-        <button type="button" onclick="location.href = '/lab2'" class="btn btn-warning">⬅️ Lab 2 & 3</button>
-        <button type="button" onclick="location.href = '/lab5'" class="btn btn-warning" disabled="disabled">Lab 5 ➡️</button>
-      </div>
+    <div class="space-between">
+      <button type="button" onclick="location.href = '/lab2'" class="btn btn-warning">⬅️ Lab 2 & 3</button>
+    </div>
 
-    </article>
-    <footer><a href="www.inf.ufrgs.br/~rbaudibert">Website</a> | <a href="https://github.com/rafaeelaudibert">GitHub</a> | <a href="https://www.facebook.com/rafaeelaudibert">Facebook</a>
-    </footer>
+  </article>
+  <footer><a href="www.inf.ufrgs.br/~rbaudibert">Website</a> | <a href="https://github.com/rafaeelaudibert">GitHub</a>
+    | <a href="https://www.facebook.com/rafaeelaudibert">Facebook</a>
+  </footer>
 
 
-    <script src="lab4.js"></script>
-    <script>
-      $('#insertButton').click(e => {
-        e.preventDefault();
+  <script src="assets/js/lab4.js"></script>
+  <script src="assets/js/hash.js"></script>
+  <script>
+    let hashTable;
 
-        const keys = $('#key')[0].value.split('\n');
-        const datas = $('#data')[0].value.split('\n');
+    function newHash() {
+      hashTable = new HashTable(1009, 'openDoubleHashing');
+      return hashTable;
+    }
 
-        if (keys[0] && datas[0] && keys.length == datas.length) {
-          for (let key in keys) {
-            $.post(`hash/${keys[key]}/${datas[key]}`).then(back => {
-              $('#information').hide();
-              const table = $('#playgroundTable');
-              const {
-                key,
-                data,
-                conflicts,
-                exist
-              } = back;
-              table.append($('<tr></tr>').append($('<td></td>').append(table[0].children.length)).append($('<td></td>').append('Insertion')).append($('<td></td>').append(key)).append($('<td></td>')
-                .append(
-                  data)).append($(
-                '<td></td>').append(exist ? 'Key already exists' : conflicts)));
-              $('#key')[0].value = '';
-              $('#data')[0].value = '';
-            });
-          }
+    function setInfo(key, data) {
+      if (!hashTable) createHash();
+      let {
+        conflicts,
+        exist
+      } = hashTable.insert(key, data);
+      return {
+        key,
+        data,
+        conflicts,
+        exist
+      }
+    }
 
-        } else {
-          $('#information').hide();
+    function getInfo(key) {
+      return hashTable.search(key)
+    }
+
+    $('#insertButton').click(e => {
+      e.preventDefault();
+      $('#information').hide();
+
+      const keys = $('#key')[0].value.split('\n').filter(x => x != '');
+      const datas = $('#data')[0].value.split('\n').filter(x => x != '');
+
+      if (keys[0] && datas[0] && keys.length == datas.length) {
+        for (let key in keys) {
           const table = $('#playgroundTable');
-          table.append($('<tr></tr>').append($('<td></td>').append(table[0].children.length)).append($('<td></td>').append('BAD REQUEST -> FILL THE VALUES')));
+          const {
+            data,
+            conflicts,
+            exist
+          } = setInfo(keys[key], datas[key]);
+          table.append($('<tr></tr>').append($('<td></td>').append(table[0].children.length)).append($(
+            '<td></td>').append('Insertion')).append($('<td></td>').append(keys[key])).append($('<td></td>')
+            .append(
+              data)).append($(
+            '<td></td>').append(exist ? 'Key already exists' : conflicts)));
+          $('#key')[0].value = '';
+          $('#data')[0].value = '';
         }
-      })
-
-      $('#retrieveButton').click(e => {
-        e.preventDefault();
-
-        const keys = $('#key')[0].value.split('\n');
-
-        if (keys[0]) {
-          for (let key of keys) {
-            $.ajax(`hash/${key}`).then(back => {
-              $('#information').hide();
-              const table = $('#playgroundTable');
-              const {
-                found,
-                elem,
-                conflicts
-              } = back;
-              table.append($('<tr></tr>').append($('<td></td>').append(table[0].children.length)).append($('<td></td>').append('Search')).append($('<td></td>').append(key)).append($('<td></td>')
-                .append(
-                  found ? elem.data : 'Not found')).append($(
-                '<td></td>').append(conflicts)));
-              $('#key')[0].value = '';
-              $('#data')[0].value = '';
-            });
-          }
-
-        } else {
-          $('#information').hide();
-          const table = $('#playgroundTable');
-          table.append($('<tr></tr>').append($('<td></td>').append(table[0].children.length)).append($('<td></td>').append('BAD REQUEST -> FILL THE VALUES')));
-        }
-      })
-
-      $('#resetButton').click(e => {
-        e.preventDefault();
-
-        $.post(`hash`).then(back => {
-          console.log('Hash nova');
-          $('#clearTable').click();
-        });
-
-      })
-
-      $('#clearTable').click(e => {
+      } else {
         const table = $('#playgroundTable');
-        const length = table[0].children.length
-        $('#information').show(0);
-        for (let i = 1; i < length; i++)
-          table[0].deleteRow(1);
-      })
+        table.append($('<tr></tr>').append($('<td></td>').append(table[0].children.length)).append($('<td></td>').append(
+          'BAD REQUEST -> FILL THE VALUES')));
+      }
+    })
 
-      $('#resetButton').click();
+    $('#retrieveButton').click(e => {
+      e.preventDefault();
 
-    </script>
-  </body>
+      $('#information').hide();
+      const keys = $('#key')[0].value.split('\n');
+
+      if (keys[0]) {
+        for (let key of keys) {
+          const {
+            found,
+            elem,
+            conflicts
+          } = getInfo(key);
+          const table = $('#playgroundTable');
+
+          table.append($('<tr></tr>').append($('<td></td>').append(table[0].children.length)).append($(
+            '<td></td>').append('Search')).append($('<td></td>').append(key)).append($('<td></td>')
+            .append(
+              found ? elem.data : 'Not found')).append($(
+            '<td></td>').append(conflicts)));
+          $('#key')[0].value = '';
+          $('#data')[0].value = '';
+        }
+
+      } else {
+        const table = $('#playgroundTable');
+        table.append($('<tr></tr>').append($('<td></td>').append(table[0].children.length)).append($('<td></td>').append(
+          'BAD REQUEST -> FILL THE VALUES')));
+      }
+    })
+
+    $('#resetButton').click(e => {
+      e.preventDefault();
+      newHash();
+      console.log('Hash nova');
+      $('#clearTable').click();
+    })
+
+    $('#clearTable').click(e => {
+      const table = $('#playgroundTable');
+      const length = table[0].children.length
+      $('#information').show(0);
+      for (let i = 1; i < length; i++)
+        table[0].deleteRow(1);
+    })
+
+    $('#resetButton').click();
+  </script>
+</body>
 
 </html>

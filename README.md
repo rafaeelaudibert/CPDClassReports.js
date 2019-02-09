@@ -1,9 +1,9 @@
-# **LABORATÓRIO 1 & 2 - CPD**
+# *CLASSIFICAÇÃO E PESQUISA DE DADOS - INF @ UFRGS*
 
-Esse repositório contém o trabalho referente aos Laboratórios 1 e 2 da cadeira de Classificação e Pesquisa de Dados, INF/UFRGS.
+Esse repositório contém relatórios referentes à Classificação e Pesquisa de Dados, desenvolvidos no INF/UFRGS.
 
 ### Pré-requisitos
-Para poder rodar o web server com o qual esse trabalho funciona, você irá precisar de:
+Para poder rodar o web server com o qual esse site funciona, você irá precisar de:
 
 * [nodeJS](https://nodejs.org/en/download/) >= 9.4.0
 * NPM >= 5.6.0
@@ -15,7 +15,7 @@ Para setar o servidor, somente na primeira vez que você entrar na pasta, você 
 
 Nas próximas vezes, o único comando necessário é `npm start`, e após isso você já poderá acessar o aplicativo em `localhost:5000`.
 
-Você poderá escolher qual dois dois relatórios deseja ver (o relatório para o Laboratório 3 está indisponível ainda, aguardando até que seja solicitado)
+Você poderá escolher todos os relatórios para ver diretamente na página inicial.
 
 ## Autor
-* **Rafael Baldasso Audibert** - 00287695.
+* **Rafael Baldasso Audibert** - Cartão UFRGS: 00287695.

@@ -1,11 +1,13 @@
 /* eslint-disable no-console */
 const bodyParser = require('body-parser');
+const rp = require('request-promise');
 const path = require('path');
 const Sort = require('./sort');
 const Hash = require('./hash')
 const express = require('express');
 const routes = require('express-namespace-routes');
 const app = express();
+const apiPath = 'https://m9qx1gsg88.execute-api.sa-east-1.amazonaws.com/prod';
 
 /*********************\
 |**** API CALLS ******|
@@ -16,8 +18,8 @@ routes.prefix('/sorted', async sorted => {
 	sorted.get('/bubble/:size', async (req, res) => {
 		try {
 			console.log(`GET/ > Bubble/Sorted - Array Size: ${req.params.size}`)
-			arr = await Sort.createSortedArray(req.params.size);
-			data = await Sort.bubbleSort(arr)
+			data = await rp(`${apiPath}/sorted/bubble-sort?size=${req.params.size}`)
+			console.log(data);
 			res.json(data)
 		} catch (e) {
 			console.log(e);
@@ -26,8 +28,7 @@ routes.prefix('/sorted', async sorted => {
 	sorted.get('/insertion/:size', async (req, res) => {
 		try {
 			console.log(`GET/ > Insertion/Sorted - Array Size: ${req.params.size}`)
-			arr = await Sort.createSortedArray(req.params.size);
-			data = await Sort.insertionSort(arr)
+			data = await rp(`${apiPath}/sorted/insertion-sort?size=${req.params.size}`)
 			res.json(data)
 		} catch (e) {
 			console.log(e);
@@ -36,8 +37,7 @@ routes.prefix('/sorted', async sorted => {
 	sorted.get('/binaryInsertion/:size', async (req, res) => {
 		try {
 			console.log(`GET/ > BinaryInsertion/Sorted - Array Size: ${req.params.size}`)
-			arr = await Sort.createSortedArray(req.params.size);
-			data = await Sort.binaryInsertionSort(arr)
+			data = await rp(`${apiPath}/sorted/binary-insertion-sort?size=${req.params.size}`)
 			res.json(data)
 		} catch (e) {
 			console.log(e);
@@ -46,9 +46,8 @@ routes.prefix('/sorted', async sorted => {
 	sorted.get('/shell/:id/:size', async (req, res) => {
 		try {
 			console.log(`GET/ > Shell${req.params.id}/Sorted - Array Size: ${req.params.size}`)
-			arr = await Sort.createSortedArray(req.params.size)
-			data = await Sort.shellSort(arr, req.params.id)
-			res.json(data);
+			data = await rp(`${apiPath}/sorted/shell-sort?size=${req.params.size}&type=${req.params.id}`)
+			res.json(data)
 		} catch (e) {
 			console.log(e);
 		}
@@ -56,8 +55,8 @@ routes.prefix('/sorted', async sorted => {
 	sorted.get('/quick/:size', async (req, res) => {
 		try {
 			console.log(`GET/ > Quick/Sorted - Array Size: ${req.params.size}`)
-			arr = await Sort.createSortedArray(req.params.size);
-			data = await Sort.quickSort(arr)
+			data = await rp(`${apiPath}/sorted/quick-sort?size=${req.params.size}`)
+			console.log(data);
 			res.json(data)
 		} catch (e) {
 			console.log(e);
@@ -66,8 +65,7 @@ routes.prefix('/sorted', async sorted => {
 	sorted.get('/merge/:size', async (req, res) => {
 		try {
 			console.log(`GET/ > Merge/Sorted - Array Size: ${req.params.size}`)
-			arr = await Sort.createSortedArray(req.params.size);
-			data = await Sort.mergeSort(arr)
+			data = await rp(`${apiPath}/sorted/merge-sort?size=${req.params.size}`)
 			res.json(data)
 		} catch (e) {
 			console.log(e);
@@ -76,8 +74,7 @@ routes.prefix('/sorted', async sorted => {
 	sorted.get('/radix/:size', async (req, res) => {
 		try {
 			console.log(`GET/ > Radix/Sorted - Array Size: ${req.params.size}`)
-			arr = await Sort.createSortedArray(req.params.size);
-			data = await Sort.radixSort(arr)
+			data = await rp(`${apiPath}/sorted/radix-sort?size=${req.params.size}`)
 			res.json(data)
 		} catch (e) {
 			console.log(e);
@@ -301,47 +298,6 @@ routes.prefix('/custom', async custom => {
 	});
 });
 
-let hashTable;
-routes.prefix('/hash', async hash => {
-	hash.post('/', async (req, res) => {
-		try {
-			console.log(`POST/ > Hash - NEW`)
-			hashTable = new Hash(1009, 'openDoubleHashing');
-			res.json(hashTable)
-		} catch (e) {
-			console.error(e);
-		}
-	});
-
-	hash.post('/:key/:data', async (req, res) => {
-		try {
-			console.log(`POST/ > Hash - Adding info`);
-			if (!hashTable) hashTable = new Hash(1009, 'openDoubleHashing');
-			let {
-				conflicts,
-				exist
-			} = hashTable.insert(req.params.key, req.params.data);
-			res.json({
-				key: req.params.key,
-				data: req.params.data,
-				conflicts: conflicts,
-				exist: exist
-			})
-		} catch (e) {
-			console.error(e);
-		}
-	});
-
-	hash.get('/:key', async (req, res) => {
-		try {
-			console.log(`GET/ > Hash - Retrieve info from key ${req.params.key}`)
-			res.json(hashTable.search(req.params.key))
-		} catch (e) {
-			console.error(e);
-		}
-	});
-});
-
 app.use(routes);
 app.use(express.static('assets'));
 app.use(express.static('node_modules/chartjs-plugin-zoom'));
@@ -350,6 +306,7 @@ app.use(express.static('Lab2+3'));
 app.use(express.static('Lab4'));
 app.use(express.static('Lab1/csv'));
 app.use(express.static('Lab2+3/csv'));
+app.use(express.static('.'));
 
 app.use(bodyParser.json());
 app.use(async (req, res, next) => {
