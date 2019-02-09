@@ -16,19 +16,19 @@
   "author": "RafaAudibert",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^5.5.0",
+    "eslint": "^5.13.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0"
+    "eslint-plugin-import": "^2.16.0"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
-    "chalk": "^2.4.1",
+    "chalk": "^2.4.2",
     "chartist-plugin-tooltips": "0.0.17",
-    "chartjs-plugin-zoom": "^0.6.5",
-    "express": "^4.16.3",
+    "chartjs-plugin-zoom": "^0.6.6",
+    "express": "^4.16.4",
     "express-namespace-routes": "0.0.3",
     "hirestime": "^3.2.1",
-    "morgan": "^1.9.0",
+    "morgan": "^1.9.1",
     "start": "^5.1.0"
   }
 }
