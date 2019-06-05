@@ -1,21 +1,21 @@
-# *CLASSIFICAÇÃO E PESQUISA DE DADOS - INF @ UFRGS*
+# Data Search and Classification Class Reports
 
-Esse repositório contém relatórios referentes à Classificação e Pesquisa de Dados, desenvolvidos no INF/UFRGS.
+This repo contains reports for the Data Search and Classification (INF01124) subject, at [INF](https://inf.ufrgs.br)-[UFRGS](https://ufrgs.br).
 
-### Pré-requisitos
-Para poder rodar o web server com o qual esse site funciona, você irá precisar de:
+### Configuring
+To run the web server which this "website" uses, you will need:
 
 * [nodeJS](https://nodejs.org/en/download/) >= 9.4.0
 * NPM >= 5.6.0
 
-Ao instalar o nodeJS, o NPM (Node Package Manager) será automaticamente instalado.
+By installing nodeJS, NPM (Node Package Manager) should be automatically installed.
 
-### Rodando o web app
-Para setar o servidor, somente na primeira vez que você entrar na pasta, você precisará usar o comando `npm install`.
+### Running
+For the first time you are running the server, you must run `npm install`.
 
-Nas próximas vezes, o único comando necessário é `npm start`, e após isso você já poderá acessar o aplicativo em `localhost:5000`.
+In the next times, the only needed command is `npm start`, and after that you can already have access to the app at `localhost:5000`.
 
-Você poderá escolher todos os relatórios para ver diretamente na página inicial.
+You can choose the report you want to access in the initial page.
 
-## Autor
-* **Rafael Baldasso Audibert** - Cartão UFRGS: 00287695.
+### Live Version
+This reports have also been adapted to a series of blog posts, released on my [personal blog](https://inf.ufrgs.br/~rbaudibert/blog), with its integral content.
