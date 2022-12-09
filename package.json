@@ -27,7 +27,7 @@
     "chalk": "^2.4.2",
     "chartist-plugin-tooltips": "0.0.17",
     "chartjs-plugin-zoom": "^0.6.6",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "express-namespace-routes": "0.0.3",
     "hirestime": "^3.2.1",
     "morgan": "^1.9.1",
